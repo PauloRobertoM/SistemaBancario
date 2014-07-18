@@ -10,12 +10,12 @@ package edu.ifrn.poo.sistemaBancario.gui;
  *
  * @author 20132014040240
  */
-public class Cliente extends javax.swing.JPanel {
+public class CadastroCliente extends javax.swing.JPanel {
 
     /**
      * Creates new form Cliente
      */
-    public Cliente() {
+    public CadastroCliente() {
         initComponents();
     }
 
@@ -139,7 +139,7 @@ public class Cliente extends javax.swing.JPanel {
                                             .addComponent(jLabel3)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 1, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
