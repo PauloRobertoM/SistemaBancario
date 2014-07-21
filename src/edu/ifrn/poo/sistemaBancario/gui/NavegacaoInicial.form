@@ -24,13 +24,13 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton1" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                  <Component id="jButton3" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <Component id="jButton1" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <Component id="jButton3" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton2" min="-2" pref="102" max="-2" attributes="0"/>
-                                  <Component id="jButton5" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <Component id="jButton2" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <Component id="jButton5" min="-2" pref="107" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
