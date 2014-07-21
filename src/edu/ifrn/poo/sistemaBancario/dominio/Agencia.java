@@ -1,6 +1,6 @@
 package edu.ifrn.poo.sistemaBancario.dominio;
 
-public class Agencia {
+public class Agencia{
     private int numero;
     private String nome;
     private String endereco;

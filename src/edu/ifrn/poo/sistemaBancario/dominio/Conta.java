@@ -1,6 +1,6 @@
 package edu.ifrn.poo.sistemaBancario.dominio;
 
-public class Conta {
+public class Conta{
     private int numero;
     private boolean ativa;
     private double saldo;
