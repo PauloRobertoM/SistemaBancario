@@ -32,6 +32,18 @@ public class Agencia {
         this.nomeGerente = nomeGerente;
     }
     
+    public void criarConta(Cliente c, int numConta, int limConta, String tipoConta){
+    
+    }
+    
+    public void buscarConta(int numero){
+        
+    }
+    
+    public void buscarCliente(String nome){
+        
+    }
+    
     // Construtor //
     public Agencia(int numero){
         this.numero = numero;
