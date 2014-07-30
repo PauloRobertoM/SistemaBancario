@@ -20,8 +20,7 @@ public class ControladorBanco {
         
         dft.addColumn("Número ", dao.listarNumBancos());
         dft.addColumn("Nome ", dao.listarNomeBancos());
-//        dft.addColumn("Categoria", dao.listarCategoria());
-//        
+//        dft.addColumn("Categoria", dao.listarCategoria());  
         return dft;
     }
 }

@@ -1,10 +1,11 @@
 package edu.ifrn.poo.sistemaBancario.controlador;
 
 import edu.ifrn.poo.sistemaBancario.dao.ClienteDao;
+import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import java.sql.SQLException;
 
 public class ControladorCliente {
-    public void cadastrarCliente(String nome, String telefone, String email) throws ClassNotFoundException, SQLException {
+    public void cadastrarCliente(Cliente c) throws ClassNotFoundException, SQLException {
 //        HabilitacaoDao habilitacao_dao = new HabilitacaoDao();
         ClienteDao cliente_dao = new ClienteDao();
 //        int habilitacao_numHab = habilitacao_dao.getNumHab(_numHab.intValue());
@@ -14,7 +15,7 @@ public class ControladorCliente {
 //            habilitacao_numHab = habilitacao_dao.getNumHab(_numHab.intValue());
 //        }
                 
-        cliente_dao.inserir(nome,telefone,email);
+        cliente_dao.inserir(c);
                 
     }
     public int getIdByNome(String nome) throws ClassNotFoundException, SQLException {
