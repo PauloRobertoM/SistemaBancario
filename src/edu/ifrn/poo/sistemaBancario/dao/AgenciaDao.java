@@ -1,12 +1,13 @@
 package edu.ifrn.poo.sistemaBancario.dao;
 
+import edu.ifrn.poo.sistemaBancario.dominio.Agencia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AgenciaDao {
-     public void inserir(int numero, String nome, String endereco, String nomeGerente) throws ClassNotFoundException, SQLException {
+     public void inserir(Agencia a) throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();        
         //construir o comando SQL
@@ -14,11 +15,11 @@ public class AgenciaDao {
         String sql = "INSERT INTO agencia" +  "(idAgencia, numero, nome, endereco, nomeGerente) VALUES" + "(?,?,?,?,?)";
         PreparedStatement stm = conn.prepareStatement(sql);
         int id=0;
-        stm.setInt(1, id);
-        stm.setInt(2, numero);
-        stm.setString(3, nome);
-        stm.setString(4, endereco);
-        stm.setString(5, nomeGerente);        
+//        stm.setInt(1, id);
+        stm.setInt(1, a.getNumero());
+        stm.setString(2, a.getNome());
+        stm.setString(3, a.getEndereco());
+        stm.setString(4, a.getNomeGerente());        
         
         //executar e validar o comando SQL.
         stm.executeUpdate();

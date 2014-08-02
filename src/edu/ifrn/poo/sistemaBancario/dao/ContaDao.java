@@ -1,5 +1,6 @@
 package edu.ifrn.poo.sistemaBancario.dao;
 
+import edu.ifrn.poo.sistemaBancario.dominio.Conta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 
 public class ContaDao {
     
-    public void inserir(int numero, boolean ativa, double saldo) throws ClassNotFoundException, SQLException {
+    public void inserir(Conta c) throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();        
         //construir o comando SQL
@@ -15,10 +16,10 @@ public class ContaDao {
         String sql = "INSERT INTO conta" +  "(idConta, numero, ativa, saldo) VALUES" + "(?,?,?,?)";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         
-        preparedStatement.setInt(1, 1);
-        preparedStatement.setInt(2, numero);
-        preparedStatement.setBoolean(3, ativa);
-        preparedStatement.setDouble(4, saldo);
+//        preparedStatement.setInt(1, 1);
+        preparedStatement.setInt(1, c.getNumero());
+        preparedStatement.setBoolean(2, c.getAtiva());
+        preparedStatement.setDouble(3, c.getSaldo());
         
         //executar e validar o comando SQL.
         preparedStatement.executeUpdate();
