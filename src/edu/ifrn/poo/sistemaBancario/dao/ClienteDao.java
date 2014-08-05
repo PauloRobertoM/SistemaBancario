@@ -11,7 +11,7 @@ public class ClienteDao {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         
-        //construir o comando SQL
+        //Construir o comando SQL
         String sql = "INSERT INTO cliente VALUES (?,?,?)";
         PreparedStatement stm = conn.prepareStatement(sql);
         
@@ -19,7 +19,7 @@ public class ClienteDao {
         stm.setString(2, c.getTelefone());
         stm.setString(3, c.getEmail());
 
-        //executar e validar o comando SQL.
+        //Executar e validar o comando SQL.
         stm.execute();
     }
     
@@ -30,11 +30,11 @@ public class ClienteDao {
         Integer[] res = new Integer[this.quantidadeCliente()];
         int i = 0;
         
-        //construir o comando SQL
+        //Construir o comando SQL
         String sql = "SELECT * FROM cliente";
         PreparedStatement stm = conn.prepareStatement(sql);
         
-        //executar e validar o comando SQL.
+        //Executar e validar o comando SQL.
         rs = stm.executeQuery();
         
         //Converter ResultSet em String        
@@ -45,17 +45,18 @@ public class ClienteDao {
                 
         return res;
     }
+    
     private int quantidadeCliente() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;        
         int quantidade = 0;
         
-        //construir o comando SQL
+        //Construir o comando SQL
         String sql = "SELECT COUNT(*) FROM cliente";
         PreparedStatement stm = conn.prepareStatement(sql);
         
-        //executar e validar o comando SQL.
+        //Executar e validar o comando SQL.
         rs = stm.executeQuery();
         
         rs.next();        
@@ -63,5 +64,4 @@ public class ClienteDao {
                 
         return quantidade;
     }
-   
 }

@@ -8,8 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class ControladorBanco {
     public void cadastrarClienteBanco(Banco b) throws ClassNotFoundException, SQLException {
-        BancoDao banco_dao = new BancoDao();
-           
+        BancoDao banco_dao = new BancoDao();   
         banco_dao.inserir(b);           
     }
     
@@ -17,7 +16,6 @@ public class ControladorBanco {
         BancoDao dao = new BancoDao();
         Integer[] bancos = dao.listarNumBancos();
         DefaultComboBoxModel df = new DefaultComboBoxModel(bancos);
-        
         return df;
     }
 
@@ -27,7 +25,7 @@ public class ControladorBanco {
         
         dft.addColumn("Número ", dao.listarNumBancos());
         dft.addColumn("Nome ", dao.listarNomeBancos());
-//        dft.addColumn("Categoria", dao.listarCategoria());  
+        //dft.addColumn("Categoria", dao.listarCategoria());  
         return dft;
     }
 }

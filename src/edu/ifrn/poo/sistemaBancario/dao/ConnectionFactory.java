@@ -13,7 +13,6 @@ public class ConnectionFactory {
             conn = DriverManager.getConnection(
 					"jdbc:mysql://127.0.0.1:3306/mydb?user=root&password=root");
         }
- 
         return conn;
     }
 }

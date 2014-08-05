@@ -8,15 +8,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class ControladorAgencia {
     public void cadastrarAgencia(Agencia a) throws ClassNotFoundException, SQLException {
-        AgenciaDao agencia_dao = new AgenciaDao();
-           
+        AgenciaDao agencia_dao = new AgenciaDao();    
         agencia_dao.inserir(a);
     }
+    
     public DefaultComboBoxModel listarAgencias() throws ClassNotFoundException, SQLException {
         AgenciaDao dao = new AgenciaDao();
         Integer[] agencias = dao.listarNumAgencias();
-        DefaultComboBoxModel df = new DefaultComboBoxModel(agencias);
-        
+        DefaultComboBoxModel df = new DefaultComboBoxModel(agencias);        
         return df;
     }
 
@@ -26,9 +25,7 @@ public class ControladorAgencia {
         
         dft.addColumn("Número ", dao.listarNumAgencias());
         dft.addColumn("Nome ", dao.listarNomeAgencias());
-//        dft.addColumn("Categoria", dao.listarCategoria());
-        
+        //dft.addColumn("Categoria", dao.listarCategoria());        
         return dft;
-    }
-      
+    }   
 }
