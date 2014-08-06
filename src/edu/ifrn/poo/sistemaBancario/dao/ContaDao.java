@@ -12,7 +12,7 @@ public class ContaDao {
         Connection conn = ConnectionFactory.getConnection();        
 
         //Construir o comando SQL
-        String sql = "INSERT INTO conta" +  "(numero, ativa, saldo) VALUES" + "(?,?,?)";
+        String sql = "INSERT INTO Conta" +  "(numero, ativa, saldo) VALUES" + "(?,?,?)";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         
         //preparedStatement.setInt(1, 1);
@@ -53,7 +53,7 @@ public class ContaDao {
         int quantidade = 0;
         
         //Construir o comando SQL
-        String sql = "SELECT COUNT(*) FROM conta";
+        String sql = "SELECT COUNT(*) FROM Conta";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.

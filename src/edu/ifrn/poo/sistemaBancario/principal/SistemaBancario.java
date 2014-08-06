@@ -20,29 +20,28 @@ public class SistemaBancario {
 			
             stm = conn.createStatement();
 	//     INSERT      //
-//        String sql = "INSERT INTO conta" +  "(idConta, numero, ativa, saldo) VALUES" + "(?,?,?,?)";
-//        preparedStatement  = conn.prepareStatement(sql);
-//        
-//        preparedStatement.setInt(1, 1);
-//        preparedStatement.setInt(2, 123);
-//        preparedStatement.setBoolean(3, true);
-//        preparedStatement.setDouble(4, 100.0);
-//        
-//        //executar e validar o comando SQL.
-//        System.out.println(preparedStatement.executeUpdate());
+        String sql = "INSERT INTO Conta" +  "(numero, ativa, saldo) VALUES" + "(?,?,?)";
+        preparedStatement  = conn.prepareStatement(sql);
+        
+        preparedStatement.setInt(1, 123);
+        preparedStatement.setBoolean(2, true);
+        preparedStatement.setDouble(3, 100.0);
+        
+        //executar e validar o comando SQL.
+        System.out.println(preparedStatement.executeUpdate());
         //////////////////////////////
         
         //     SELECT      //
-        ResultSet rs = stm.executeQuery("SELECT * FROM conta"); 
-        while(rs.next()) {  
-            int id = rs.getInt("idConta");  
-            int numero = rs.getInt("numero");  
-            boolean ativa = rs.getBoolean("ativa");
-            double saldo = rs.getDouble("saldo");
-//	 As vari�veis tit, aut e totalFaixas cont�m os valores retornados   
-//         pela query. Vamos imprim�-los  
-            System.out.println("ID: " + id + " NUMERO: " + numero + " ATIVA: " + ativa + "SALDO: " + saldo);
-        }       
+//        ResultSet rs = stm.executeQuery("SELECT * FROM conta"); 
+//        while(rs.next()) {  
+//            int id = rs.getInt("idConta");  
+//            int numero = rs.getInt("numero");  
+//            boolean ativa = rs.getBoolean("ativa");
+//            double saldo = rs.getDouble("saldo");
+////	 As vari�veis tit, aut e totalFaixas cont�m os valores retornados   
+////         pela query. Vamos imprim�-los  
+//            System.out.println("ID: " + id + " NUMERO: " + numero + " ATIVA: " + ativa + "SALDO: " + saldo);
+//        }       
         /////////////////////////
         
         } catch (SQLException e) {
