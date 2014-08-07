@@ -4,6 +4,7 @@ public class Conta{
     private int numero;
     private boolean ativa;
     private double saldo;
+    Cliente c ;
     
     public boolean getAtiva() {
         return ativa;
@@ -24,6 +25,12 @@ public class Conta{
         this.saldo = saldo;
     }
     
+    public void setCliente(Cliente c) {
+        this.c = c;
+    }
+    public Cliente getCliente(){
+        return c;
+    }
     public boolean sacar(double valor){
         try{
             if (saldo >= valor){
