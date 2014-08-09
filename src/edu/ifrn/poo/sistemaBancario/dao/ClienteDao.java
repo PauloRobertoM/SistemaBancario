@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ClienteDao {
     public void inserir(Cliente c) throws SQLException, ClassNotFoundException {
@@ -12,26 +13,50 @@ public class ClienteDao {
         Connection conn = ConnectionFactory.getConnection();
         
         //Construir o comando SQL
-        String sql = "INSERT INTO cliente VALUES (?,?,?)";
-        PreparedStatement stm = conn.prepareStatement(sql);
+        String sql = "INSERT INTO Cliente" + "(nome, telefone, email) VALUES" + "(?,?,?)";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
         
-        stm.setString(1, c.getNome());
-        stm.setString(2, c.getTelefone());
-        stm.setString(3, c.getEmail());
-
+         //preparedStatement.setInt(1, 1);
+        preparedStatement.setString(1, c.getNome());
+        preparedStatement.setString(2, c.getTelefone());
+        preparedStatement.setString(3, c.getEmail());
+        
         //Executar e validar o comando SQL.
-        stm.execute();
+        preparedStatement.executeUpdate();      
+
     }
     
-    public Integer[] listarCliente() throws ClassNotFoundException, SQLException {
+//    public Integer[] listarCliente() throws ClassNotFoundException, SQLException {
+//        //Estabelecer a conexão
+//        Connection conn = ConnectionFactory.getConnection();
+//        ResultSet rs;
+//        Integer[] res = new Integer[this.quantidadeCliente()];
+//        int i = 0;
+//        
+//        //Construir o comando SQL
+//        String sql = "SELECT * FROM cliente";
+//        PreparedStatement stm = conn.prepareStatement(sql);
+//        
+//        //Executar e validar o comando SQL.
+//        rs = stm.executeQuery();
+//        
+//        //Converter ResultSet em String        
+//        while(rs.next()== true) {
+//            res[i] = rs.getInt("nome");                       
+//            i++;
+//        }
+//                
+//        return res;
+//    }
+    public ArrayList<Cliente> listarCliente() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
-        Integer[] res = new Integer[this.quantidadeCliente()];
-        int i = 0;
-        
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+       // Conta c;
+        Cliente c;
         //Construir o comando SQL
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM Cliente ORDER BY nome ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -39,13 +64,16 @@ public class ClienteDao {
         
         //Converter ResultSet em String        
         while(rs.next()== true) {
-            res[i] = rs.getInt("nome");                       
-            i++;
+            c = new Cliente();
+            c.setNome(rs.getString("nome"));
+            c.setTelefone(rs.getString("telefone"));
+            c.setEmail(rs.getString("email"));
+            
+            clientes.add(c);
+          
         }
-                
-        return res;
+        return clientes;          
     }
-    
     private int quantidadeCliente() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();

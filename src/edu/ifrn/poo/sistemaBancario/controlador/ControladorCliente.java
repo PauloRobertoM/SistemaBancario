@@ -4,6 +4,7 @@ import edu.ifrn.poo.sistemaBancario.dao.ClienteDao;
 import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import java.util.Iterator;
 
 public class ControladorCliente {
     public void cadastrarCliente(Cliente c) throws ClassNotFoundException, SQLException {
@@ -19,9 +20,19 @@ public class ControladorCliente {
     public DefaultTableModel listarCliente() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
         ClienteDao dao = new ClienteDao();        
-        dft.addColumn("Cliente ", dao.listarCliente());
+        
+	Iterator<Cliente> it = dao.listarCliente().iterator();
+	Cliente c;
+	while(it.hasNext()) {
+            c = it.next();
+          //procurar componente...
+         // dft.addRow("Cliente ",c);
+            
+        }
+		//dft.addColumn("Cliente ", dao.listarCliente());
         //dft.addColumn("Data de Vencimento", dao.listarDataVenc());
         //dft.addColumn("Categoria", dao.listarCategoria());
         return dft;
     }
+	
 }

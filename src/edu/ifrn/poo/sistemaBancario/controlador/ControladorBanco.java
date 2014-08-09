@@ -5,6 +5,7 @@ import edu.ifrn.poo.sistemaBancario.dominio.Banco;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import java.util.Iterator;
 
 public class ControladorBanco {
     public void cadastrarClienteBanco(Banco b) throws ClassNotFoundException, SQLException {
@@ -12,19 +13,28 @@ public class ControladorBanco {
         banco_dao.inserir(b);           
     }
     
-     public DefaultComboBoxModel listarBancos() throws ClassNotFoundException, SQLException {
-        BancoDao dao = new BancoDao();
-        Integer[] bancos = dao.listarNumBancos();
-        DefaultComboBoxModel df = new DefaultComboBoxModel(bancos);
-        return df;
-    }
+//    public DefaultComboBoxModel listarBancos() throws ClassNotFoundException, SQLException {
+//        BancoDao dao = new BancoDao();
+//        Integer[] bancos = dao.listarNumBancos();
+//        DefaultComboBoxModel df = new DefaultComboBoxModel(bancos);
+//        return df;
+//    }
 
-    public DefaultTableModel listarBancoTabela() throws ClassNotFoundException, SQLException {
+    public DefaultTableModel listarBanco() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
         BancoDao dao = new BancoDao();
         
-        dft.addColumn("Número ", dao.listarNumBancos());
-        dft.addColumn("Nome ", dao.listarNomeBancos());
+	Iterator<Banco> it = dao.listarBanco().iterator();
+        Banco b;
+		
+        while(it.hasNext()) {
+            b = it.next();
+          //procurar componente...
+         // dft.addRow("Banco ",b);
+            
+        }
+        //dft.addColumn("Número ", dao.listarNumBancos());
+        //dft.addColumn("Nome ", dao.listarNomeBancos());
         //dft.addColumn("Categoria", dao.listarCategoria());  
         return dft;
     }

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AgenciaDao {
      public void inserir(Agencia a) throws ClassNotFoundException, SQLException {
@@ -26,15 +27,37 @@ public class AgenciaDao {
         stm.executeUpdate();
     }
      
-    public Integer[] listarNumAgencias() throws ClassNotFoundException, SQLException {
+//    public Integer[] listarNumAgencias() throws ClassNotFoundException, SQLException {
+//        //Estabelecer a conexão
+//        Connection conn = ConnectionFactory.getConnection();
+//        ResultSet rs;
+//        Integer[] res = new Integer[this.quantidadeAgencias()];
+//        int i = 0;
+//        
+//        //Construir o comando SQL
+//        String sql = "SELECT numero FROM agencia ORDER BY nome ASC";
+//        PreparedStatement stm = conn.prepareStatement(sql);
+//        
+//        //Executar e validar o comando SQL.
+//        rs = stm.executeQuery();
+//        
+//        //Converter ResultSet em String        
+//        while(rs.next()== true) {
+//            res[i] = rs.getInt("numero");                       
+//            i++;
+//        }
+//                
+//        return res;
+//    }
+	
+    public ArrayList<Agencia> listarAgencia() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
-        Integer[] res = new Integer[this.quantidadeAgencias()];
-        int i = 0;
-        
+        ArrayList<Agencia> agencias = new ArrayList<Agencia>();
+        Agencia a;
         //Construir o comando SQL
-        String sql = "SELECT numero FROM agencia ORDER BY nome ASC";
+        String sql = "SELECT * FROM Agencia ORDER BY numero ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -42,13 +65,19 @@ public class AgenciaDao {
         
         //Converter ResultSet em String        
         while(rs.next()== true) {
-            res[i] = rs.getInt("numero");                       
-            i++;
+            a = new Agencia();
+           
+            a.setNumero(rs.getInt("numero")); 
+            a.setNome(rs.getString("nome"));
+            a.setEndereco(rs.getString("endereco"));
+			a.setNomeGerente(rs.getString("nomeGerente"));
+                        
+            agencias.add(a);
+          
         }
-                
-        return res;
+        return agencias;          
     }
-    
+	
     private int quantidadeAgencias() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();

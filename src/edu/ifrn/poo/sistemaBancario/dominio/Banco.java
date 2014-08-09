@@ -22,8 +22,8 @@ public class Banco {
     }
     
     // Construtor //
-    public Banco(String nome, int numero){
-        this.nome = nome;
-        this.numero = numero;
-    }    
+//    public Banco(String nome, int numero){
+//        this.nome = nome;
+//        this.numero = numero;
+//    }    
 }

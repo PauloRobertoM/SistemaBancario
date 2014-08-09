@@ -1,5 +1,10 @@
 package edu.ifrn.poo.sistemaBancario.gui;
 
+import edu.ifrn.poo.sistemaBancario.controlador.ControladorCliente;
+import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 public class CadastroCliente extends javax.swing.JFrame {
     public CadastroCliente() {
         initComponents();
@@ -39,21 +44,10 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel3.setText("Telefone:");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Email:");
 
         jRadioButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jRadioButton1.setText("Pessoa Física");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("CPF:");
 
@@ -64,9 +58,19 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel7.setText("Nome Fantasia:");
 
-        jButton1.setText("Voltar");
+        jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Cadastrar");
+        jButton2.setText("Fechar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,15 +112,15 @@ public class CadastroCliente extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jRadioButton2)
                                     .addComponent(jRadioButton1))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -168,13 +172,41 @@ public class CadastroCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         // cadastro
+        try {  
+        String nome, telefone, email;
+        Cliente c = new Cliente();
+        ControladorCliente controlador = new ControladorCliente();
+        nome = jTextField1.getText();
+        telefone = jTextField2.getText();
+        email = jTextField3.getText();
+            
+        if(jTextField1 == null && jTextField2 == null && jTextField3 == null){
+            JOptionPane.showMessageDialog(null, "Informe todos os dados");
+        }
+        else{
+            c.setNome(nome);
+            c.setTelefone(telefone);
+            c.setEmail(email);
+
+            controlador.cadastrarCliente(c);
+            jTextField1.setText(null);
+            jTextField2.setText(null);
+            jTextField3.setText(null);
+        }
+            
+    } catch (ClassNotFoundException ex) {
+        JOptionPane.showMessageDialog(this, "Driver não instalado!");
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
+         System.err.println(ex.getMessage());
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     public static void main(String args[]) {

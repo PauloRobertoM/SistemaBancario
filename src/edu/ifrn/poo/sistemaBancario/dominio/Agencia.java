@@ -45,7 +45,7 @@ public class Agencia{
     }
     
     // Construtor //
-    public Agencia(int numero){
-        this.numero = numero;
-    }
+//    public Agencia(int numero){
+//        this.numero = numero;
+//    }
 }

@@ -129,7 +129,7 @@ public class VisualizarConta extends javax.swing.JFrame {
         ControladorConta conta_controlador = new ControladorConta();
         DefaultTableModel dft = new DefaultTableModel();
         try {
-            dft = conta_controlador.listarContaTabela();
+            dft = conta_controlador.listarConta();
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Driver não instalado!");
         } catch (SQLException ex) {

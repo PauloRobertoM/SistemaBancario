@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class BancoDao {
     public void inserir(Banco b) throws ClassNotFoundException, SQLException {
@@ -24,15 +25,37 @@ public class BancoDao {
         stm.execute();
     }
     
-    public Integer[] listarNumBancos() throws ClassNotFoundException, SQLException {
+//    public Integer[] listarNumBancos() throws ClassNotFoundException, SQLException {
+//        //Estabelecer a conexão
+//        Connection conn = ConnectionFactory.getConnection();
+//        ResultSet rs;
+//        Integer[] res = new Integer[this.quantidadeBancos()];
+//        int i = 0;
+//        
+//        //Construir o comando SQL
+//        String sql = "SELECT numero FROM banco ORDER BY nome ASC";
+//        PreparedStatement stm = conn.prepareStatement(sql);
+//        
+//        //Executar e validar o comando SQL.
+//        rs = stm.executeQuery();
+//        
+//        //Converter ResultSet em String        
+//        while(rs.next()== true) {
+//            res[i] = rs.getInt("numero");                       
+//            i++;
+//        }
+//                
+//        return res;
+//    }
+	
+    public ArrayList<Banco> listarBanco() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
-        Integer[] res = new Integer[this.quantidadeBancos()];
-        int i = 0;
-        
+        ArrayList<Banco> bancos = new ArrayList<Banco>();
+        Banco b;
         //Construir o comando SQL
-        String sql = "SELECT numero FROM banco ORDER BY nome ASC";
+        String sql = "SELECT * FROM Banco ORDER BY numero ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -40,13 +63,17 @@ public class BancoDao {
         
         //Converter ResultSet em String        
         while(rs.next()== true) {
-            res[i] = rs.getInt("numero");                       
-            i++;
+            b = new Banco();
+            
+			b.setNome(rs.getString("nome"));
+            b.setNumero(rs.getInt("numero"));      
+            
+            bancos.add(b);
+          
         }
-                
-        return res;
+        return bancos;          
     }
-    
+	
     private int quantidadeBancos() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();

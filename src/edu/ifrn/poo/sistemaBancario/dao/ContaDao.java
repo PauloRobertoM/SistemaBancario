@@ -1,10 +1,12 @@
 package edu.ifrn.poo.sistemaBancario.dao;
 
+import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import edu.ifrn.poo.sistemaBancario.dominio.Conta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ContaDao {
     public void inserir(Conta c) throws ClassNotFoundException, SQLException {
@@ -24,15 +26,37 @@ public class ContaDao {
         preparedStatement.executeUpdate();
     }
 
-    public Integer[] listarConta() throws ClassNotFoundException, SQLException {
+//    public Integer[] listarConta() throws ClassNotFoundException, SQLException {
+//        //Estabelecer a conexão
+//        Connection conn = ConnectionFactory.getConnection();
+//        ResultSet rs;
+//        Integer[] res = new Integer[this.quantidadeContas()];
+//        int i = 0;
+//        
+//        //Construir o comando SQL
+//        String sql = "SELECT numero FROM Conta ORDER BY numero ASC";
+//        PreparedStatement stm = conn.prepareStatement(sql);
+//        
+//        //Executar e validar o comando SQL.
+//        rs = stm.executeQuery();
+//        
+//        //Converter ResultSet em String        
+//        while(rs.next()== true) {
+//            res[i] = rs.getInt("numero");                       
+//            i++;
+//        }
+//        return res;          
+//    }
+    
+    public ArrayList<Conta> listarConta() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
-        Integer[] res = new Integer[this.quantidadeContas()];
-        int i = 0;
-        
-        //Construir o comando SQL
-        String sql = "SELECT numero FROM Conta ORDER BY numero ASC";
+        ArrayList<Conta> contas = new ArrayList<Conta>();
+        Conta c;
+        Cliente cl;
+       //Construir o comando SQL
+        String sql = "SELECT * FROM Conta ORDER BY numero ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -40,10 +64,21 @@ public class ContaDao {
         
         //Converter ResultSet em String        
         while(rs.next()== true) {
-            res[i] = rs.getInt("numero");                       
-            i++;
+            c = new Conta();
+//          cl = new Cliente();
+            c.setNumero(rs.getInt("numero")); 
+            c.setAtiva(rs.getBoolean("ativa"));
+            c.setSaldo(rs.getDouble("saldo"));
+            
+//            cl.setNome(rs.getString("nome"));
+//            cl.setTelefone(rs.getString("telefone"));
+//            cl.setEmail(rs.getString("email"));
+//            c.setCliente(cl);
+//            
+            contas.add(c);
+          
         }
-        return res;          
+        return contas;          
     }
     
     private int quantidadeContas() throws ClassNotFoundException, SQLException {
