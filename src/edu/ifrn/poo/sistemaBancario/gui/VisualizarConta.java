@@ -6,6 +6,7 @@
 
 package edu.ifrn.poo.sistemaBancario.gui;
 
+import edu.ifrn.poo.sistemaBancario.controlador.ControladorCliente;
 import edu.ifrn.poo.sistemaBancario.controlador.ControladorConta;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -126,6 +127,7 @@ public class VisualizarConta extends javax.swing.JFrame {
     }
     
     private TableModel listarContas(){
+//        ControladorCliente cliente_controlador = new ControladorCliente();
         ControladorConta conta_controlador = new ControladorConta();
         DefaultTableModel dft = new DefaultTableModel();
         try {

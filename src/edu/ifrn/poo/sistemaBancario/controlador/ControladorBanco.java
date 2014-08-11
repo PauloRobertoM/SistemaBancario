@@ -30,7 +30,8 @@ public class ControladorBanco {
         while(it.hasNext()) {
             b = it.next();
           //procurar componente...
-         // dft.addRow("Banco ",b);
+            dft.addColumn(b.getNumero());
+            dft.addColumn(b.getNome());
             
         }
         //dft.addColumn("Número ", dao.listarNumBancos());

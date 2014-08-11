@@ -56,7 +56,7 @@ public class ContaDao {
         Conta c;
         Cliente cl;
        //Construir o comando SQL
-        String sql = "SELECT * FROM Conta ORDER BY numero ASC";
+        String sql = "SELECT * FROM Conta, Cliente where Conta.Cliente_idCliente = Cliente.idCliente;";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -65,15 +65,15 @@ public class ContaDao {
         //Converter ResultSet em String        
         while(rs.next()== true) {
             c = new Conta();
-//          cl = new Cliente();
+          cl = new Cliente();
             c.setNumero(rs.getInt("numero")); 
             c.setAtiva(rs.getBoolean("ativa"));
             c.setSaldo(rs.getDouble("saldo"));
             
-//            cl.setNome(rs.getString("nome"));
-//            cl.setTelefone(rs.getString("telefone"));
-//            cl.setEmail(rs.getString("email"));
-//            c.setCliente(cl);
+            cl.setNome(rs.getString("nome"));
+            cl.setTelefone(rs.getString("telefone"));
+            cl.setEmail(rs.getString("email"));
+            c.setCliente(cl);
 //            
             contas.add(c);
           

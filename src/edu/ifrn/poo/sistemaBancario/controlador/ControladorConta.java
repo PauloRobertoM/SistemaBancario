@@ -1,6 +1,8 @@
 package edu.ifrn.poo.sistemaBancario.controlador;
 
+import edu.ifrn.poo.sistemaBancario.dao.ClienteDao;
 import edu.ifrn.poo.sistemaBancario.dao.ContaDao;
+import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import edu.ifrn.poo.sistemaBancario.dominio.Conta;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -25,19 +27,40 @@ public class ControladorConta {
     public DefaultTableModel listarConta() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
         ContaDao dao = new ContaDao(); 
-        
+        ClienteDao dao1 = new ClienteDao();
         Iterator<Conta> it = dao.listarConta().iterator();
         Conta c;
-       while(it.hasNext()) {
-          c = it.next();
+        Cliente c1;
+        Object[] obj;
+        int index = 0;
+                dft.addColumn("Número Conta");
+          dft.addColumn("Situação");
+            dft.addColumn("Saldo");
+            dft.addColumn("Nome Cliente");
+            dft.addColumn("Telefone");
+            dft.addColumn("E-mail");
+                          
+        while(it.hasNext()) {
+            c = it.next();
+            index++;
+            
+            
+            obj = new Object[6];
           //procurar componente...
-         dft.addColumn(c.getNumero());
-         dft.addColumn(c.getAtiva());
-         dft.addColumn(c.getSaldo());
-//         dft.addColumn(c.getCliente().getNome());
-//         dft.addColumn(c.getCliente().getTelefone());
-//         dft.addColumn(c.getCliente().getEmail());
-//         dft.getTableModelListeners();
+            obj[0] = c.getNumero();
+            obj[1] = c.getAtiva();
+            obj[2] = c.getSaldo();
+            obj[3] = c.getCliente().getNome();
+            obj[4] = c.getCliente().getTelefone();
+            obj[5] = c.getCliente().getEmail();
+            dft.addRow(obj);
+//            dft.addColumn(c.getNumero());
+//            dft.addColumn(c.getAtiva());
+//            dft.addColumn(c.getSaldo());
+//            dft.addColumn(c.getCliente().getNome());
+//            dft.addColumn(c.getCliente().getTelefone());
+//            dft.addColumn(c.getCliente().getEmail());
+            
         }
        
         //dft.addColumn("Data de Vencimento", dao.listarDataVenc());

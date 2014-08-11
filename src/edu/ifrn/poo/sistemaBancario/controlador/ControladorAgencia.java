@@ -30,8 +30,10 @@ public class ControladorAgencia {
 	while(it.hasNext()) {
             a = it.next();
           //procurar componente...
-         // dft.addRow("Agencia ",a);
-            
+            dft.addColumn(a.getNumero());
+            dft.addColumn(a.getNome());
+            dft.addColumn(a.getEndereco());
+            dft.addColumn(a.getNomeGerente());
         }
         //dft.addColumn("Número ", dao.listarNumAgencias());
         //dft.addColumn("Nome ", dao.listarNomeAgencias());
