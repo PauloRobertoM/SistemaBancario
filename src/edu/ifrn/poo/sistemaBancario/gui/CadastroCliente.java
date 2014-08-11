@@ -14,6 +14,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -46,11 +47,13 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel4.setText("Email:");
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jRadioButton1.setText("Pessoa Física");
 
         jLabel5.setText("CPF:");
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jRadioButton2.setText("Pessoa Jurídica");
 
@@ -218,6 +221,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
