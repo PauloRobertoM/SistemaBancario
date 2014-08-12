@@ -21,31 +21,28 @@ public class ControladorCliente {
     
     public DefaultTableModel listarCliente() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
-        ClienteDao dao = new ClienteDao();
-        JTable table = new JTable(dft);
+        ClienteDao dao = new ClienteDao(); 
+       
+        Iterator<Cliente> it = dao.listarCliente().iterator();
+        Cliente c;
+        Object[] obj;
         
-	Iterator<Cliente> it = dao.listarCliente().iterator();
-	Cliente c;
-        
-	while(it.hasNext()) {
+        // Colunas //
+        dft.addColumn("Nome Cliente");
+        dft.addColumn("Telefone");
+        dft.addColumn("E-mail");
+                          
+        while(it.hasNext()) {
             c = it.next();
-            dft.addColumn(c.getNome());
-            dft.addColumn(c.getTelefone());
-            dft.addColumn(c.getEmail());
+                     
+            obj = new Object[3];
+            obj[0] = c.getNome();
+            obj[1] = c.getTelefone();
+            obj[2] = c.getEmail();
             
-          //procurar componente...
-         // dft.addRow("Cliente ",c);
-            
+            dft.addRow(obj);
         }
-              
-        
-        
-        
-        
-        
-		//dft.addColumn("Cliente ", dao.listarCliente());
-        //dft.addColumn("Data de Vencimento", dao.listarDataVenc());
-        //dft.addColumn("Categoria", dao.listarCategoria());
+		
         return dft;
     }
 	

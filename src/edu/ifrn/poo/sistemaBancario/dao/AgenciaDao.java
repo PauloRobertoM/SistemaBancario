@@ -1,6 +1,7 @@
 package edu.ifrn.poo.sistemaBancario.dao;
 
 import edu.ifrn.poo.sistemaBancario.dominio.Agencia;
+import edu.ifrn.poo.sistemaBancario.dominio.Banco;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,8 +57,10 @@ public class AgenciaDao {
         ResultSet rs;
         ArrayList<Agencia> agencias = new ArrayList<Agencia>();
         Agencia a;
+        Banco b;
         //Construir o comando SQL
-        String sql = "SELECT * FROM Agencia ORDER BY numero ASC";
+//        String sql = "SELECT * FROM Agencia ORDER BY numero ASC";
+        String sql = "SELECT * FROM Agencia, Conta where Agencia.Conta_idConta = Conta.idConta;";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -66,14 +69,18 @@ public class AgenciaDao {
         //Converter ResultSet em String        
         while(rs.next()== true) {
             a = new Agencia();
-           
+            b = new Banco();
+            
             a.setNumero(rs.getInt("numero")); 
             a.setNome(rs.getString("nome"));
             a.setEndereco(rs.getString("endereco"));
-			a.setNomeGerente(rs.getString("nomeGerente"));
-                        
+            a.setNomeGerente(rs.getString("nomeGerente"));
+            
+            b.setNome(rs.getString("nome"));
+            b.setNumero(rs.getInt("numero")); 
+            a.setBanco(b);
+            
             agencias.add(a);
-          
         }
         return agencias;          
     }

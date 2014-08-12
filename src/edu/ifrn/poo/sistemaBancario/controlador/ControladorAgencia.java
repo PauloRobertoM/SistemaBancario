@@ -22,22 +22,35 @@ public class ControladorAgencia {
 
     public DefaultTableModel listarAgencia() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
-        AgenciaDao dao = new AgenciaDao();
-        
-	Iterator<Agencia> it = dao.listarAgencia().iterator();
+        AgenciaDao dao = new AgenciaDao(); 
+       
+        Iterator<Agencia> it = dao.listarAgencia().iterator();
         Agencia a;
+        Object[] obj;
+              
+	// Colunas //
+        dft.addColumn("Número");
+        dft.addColumn("Nome");
+        dft.addColumn("Endereço");
+        dft.addColumn("Nome do Gerente");
+        dft.addColumn("Nome Banco");
+        dft.addColumn("Número");
         
-	while(it.hasNext()) {
+        
+        while(it.hasNext()) {
             a = it.next();
-          //procurar componente...
-            dft.addColumn(a.getNumero());
-            dft.addColumn(a.getNome());
-            dft.addColumn(a.getEndereco());
-            dft.addColumn(a.getNomeGerente());
+             
+            obj = new Object[7];
+            obj[0] = a.getNumero();
+            obj[1] = a.getNome();
+            obj[2] = a.getEndereco();
+            obj[3] = a.getNomeGerente();
+            obj[4] = a.getBanco().getNome();
+            obj[5] = a.getBanco().getNumero();
+                        
+            dft.addRow(obj);
         }
-        //dft.addColumn("Número ", dao.listarNumAgencias());
-        //dft.addColumn("Nome ", dao.listarNomeAgencias());
-        //dft.addColumn("Categoria", dao.listarCategoria());        
+		
         return dft;
     }
     

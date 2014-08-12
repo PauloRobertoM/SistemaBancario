@@ -22,21 +22,26 @@ public class ControladorBanco {
 
     public DefaultTableModel listarBanco() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
-        BancoDao dao = new BancoDao();
-        
-	Iterator<Banco> it = dao.listarBanco().iterator();
+        BancoDao dao = new BancoDao(); 
+       
+        Iterator<Banco> it = dao.listarBanco().iterator();
         Banco b;
-		
+        Object[] obj;
+       
+	// Colunas //
+        dft.addColumn("Nome");
+        dft.addColumn("Número");
+           
         while(it.hasNext()) {
             b = it.next();
-          //procurar componente...
-            dft.addColumn(b.getNumero());
-            dft.addColumn(b.getNome());
             
+            obj = new Object[2];
+            obj[0] = b.getNome();
+            obj[1] = b.getNumero();
+            
+            dft.addRow(obj);
         }
-        //dft.addColumn("Número ", dao.listarNumBancos());
-        //dft.addColumn("Nome ", dao.listarNomeBancos());
-        //dft.addColumn("Categoria", dao.listarCategoria());  
+		
         return dft;
     }
 }

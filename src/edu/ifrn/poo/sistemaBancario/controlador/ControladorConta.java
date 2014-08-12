@@ -27,26 +27,24 @@ public class ControladorConta {
     public DefaultTableModel listarConta() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
         ContaDao dao = new ContaDao(); 
-        ClienteDao dao1 = new ClienteDao();
+        
         Iterator<Conta> it = dao.listarConta().iterator();
         Conta c;
-        Cliente c1;
+        
         Object[] obj;
-        int index = 0;
-                dft.addColumn("Número Conta");
-          dft.addColumn("Situação");
-            dft.addColumn("Saldo");
-            dft.addColumn("Nome Cliente");
-            dft.addColumn("Telefone");
-            dft.addColumn("E-mail");
+        
+	// Colunas //
+	dft.addColumn("Número Conta");
+        dft.addColumn("Situação");
+        dft.addColumn("Saldo");
+        dft.addColumn("Nome Cliente");
+        dft.addColumn("Telefone");
+        dft.addColumn("E-mail");
                           
         while(it.hasNext()) {
             c = it.next();
-            index++;
-            
             
             obj = new Object[6];
-          //procurar componente...
             obj[0] = c.getNumero();
             obj[1] = c.getAtiva();
             obj[2] = c.getSaldo();
@@ -63,8 +61,6 @@ public class ControladorConta {
             
         }
        
-        //dft.addColumn("Data de Vencimento", dao.listarDataVenc());
-        //dft.addColumn("Categoria", dao.listarCategoria());
         return dft;
     }
     

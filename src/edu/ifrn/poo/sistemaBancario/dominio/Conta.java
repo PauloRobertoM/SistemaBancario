@@ -5,6 +5,7 @@ public class Conta{
     private boolean ativa;
     private double saldo;
     Cliente c ;
+    Agencia a;
     
     public boolean getAtiva() {
         return ativa;
@@ -31,6 +32,13 @@ public class Conta{
     public Cliente getCliente(){
         return c;
     }
+    public void setAgencia(Agencia a) {
+        this.a = a;
+    }
+    public Agencia getAgencia(){
+        return a;
+    }
+    
     public boolean sacar(double valor){
         try{
             if (saldo >= valor){
