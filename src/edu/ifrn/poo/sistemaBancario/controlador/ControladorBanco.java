@@ -13,13 +13,17 @@ public class ControladorBanco {
         banco_dao.inserir(b);           
     }
     
-//    public DefaultComboBoxModel listarBancos() throws ClassNotFoundException, SQLException {
-//        BancoDao dao = new BancoDao();
-//        Integer[] bancos = dao.listarNumBancos();
-//        DefaultComboBoxModel df = new DefaultComboBoxModel(bancos);
-//        return df;
-//    }
-
+    public DefaultComboBoxModel listarBancos() throws ClassNotFoundException, SQLException {
+        BancoDao dao = new BancoDao();
+        String[] bancos = dao.listarNomeBancos();
+        DefaultComboBoxModel df = new DefaultComboBoxModel(bancos);
+        return df;
+    }
+    public int getIdByNumero(String nomeBanco) throws ClassNotFoundException, SQLException {
+        BancoDao bancodao = new BancoDao();
+        
+        return bancodao.getIdByNumero(nomeBanco);
+    }
     public DefaultTableModel listarBanco() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
         BancoDao dao = new BancoDao(); 

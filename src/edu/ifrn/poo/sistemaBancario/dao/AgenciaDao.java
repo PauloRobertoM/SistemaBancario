@@ -104,15 +104,15 @@ public class AgenciaDao {
         return quantidade;
     }
     
-    public String[] listarNomeAgencias() throws ClassNotFoundException, SQLException {
+    public Integer[] listarNumAgencias() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
-        String[] res = new String[this.quantidadeAgencias()];
+        Integer[] res = new Integer[this.quantidadeAgencias()];
         int i = 0;
         
         //Construir o comando SQL
-        String sql = "SELECT nome FROM agencia ORDER BY nome ASC";
+        String sql = "SELECT numero FROM agencia ORDER BY numero ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -120,7 +120,7 @@ public class AgenciaDao {
         
         //Converter ResultSet em String        
         while(rs.next()== true) {
-            res[i] = rs.getString(1);                       
+            res[i] = rs.getInt(1);                       
             i++;
         }
                 

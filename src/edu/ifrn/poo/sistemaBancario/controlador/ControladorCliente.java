@@ -5,6 +5,7 @@ import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +18,13 @@ public class ControladorCliente {
     public void verCliente(Cliente c) throws ClassNotFoundException, SQLException {
         ClienteDao cliente_dao = new ClienteDao();
         cliente_dao.listarCliente();
+    }
+    
+    public DefaultComboBoxModel listarClientes() throws ClassNotFoundException, SQLException {
+        ClienteDao dao = new ClienteDao();
+        String[] clientes = dao.listarNomeClientes();
+        DefaultComboBoxModel df = new DefaultComboBoxModel(clientes);
+        return df;
     }
     
     public DefaultTableModel listarCliente() throws ClassNotFoundException, SQLException {

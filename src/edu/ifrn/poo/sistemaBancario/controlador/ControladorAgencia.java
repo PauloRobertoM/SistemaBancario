@@ -1,6 +1,7 @@
 package edu.ifrn.poo.sistemaBancario.controlador;
 
 import edu.ifrn.poo.sistemaBancario.dao.AgenciaDao;
+import edu.ifrn.poo.sistemaBancario.dao.BancoDao;
 import edu.ifrn.poo.sistemaBancario.dominio.Agencia;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
@@ -10,15 +11,17 @@ import java.util.Iterator;
 public class ControladorAgencia {
     public void cadastrarAgencia(Agencia a) throws ClassNotFoundException, SQLException {
         AgenciaDao agencia_dao = new AgenciaDao();    
+        BancoDao banco_dao = new BancoDao();
+
         agencia_dao.inserir(a);
     }
     
-//    public DefaultComboBoxModel listarAgencias() throws ClassNotFoundException, SQLException {
-//        AgenciaDao dao = new AgenciaDao();
-//        Integer[] agencias = dao.listarNumAgencias();
-//        DefaultComboBoxModel df = new DefaultComboBoxModel(agencias);        
-//        return df;
-//    }
+    public DefaultComboBoxModel listarAgencias() throws ClassNotFoundException, SQLException {
+        AgenciaDao dao = new AgenciaDao();
+        Integer[] agencias = dao.listarNumAgencias();
+        DefaultComboBoxModel df = new DefaultComboBoxModel(agencias);        
+        return df;
+    }
 
     public DefaultTableModel listarAgencia() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();

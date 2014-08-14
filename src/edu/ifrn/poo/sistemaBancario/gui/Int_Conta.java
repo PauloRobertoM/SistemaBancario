@@ -1,8 +1,12 @@
 package edu.ifrn.poo.sistemaBancario.gui;
 
+import edu.ifrn.poo.sistemaBancario.controlador.ControladorAgencia;
+import edu.ifrn.poo.sistemaBancario.controlador.ControladorCliente;
 import edu.ifrn.poo.sistemaBancario.controlador.ControladorConta;
 import edu.ifrn.poo.sistemaBancario.dominio.Conta;
 import java.sql.SQLException;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class Int_Conta extends javax.swing.JFrame {
@@ -60,9 +64,23 @@ public class Int_Conta extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Não");
 
+        jComboBox1.setModel(listarClientes());
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Cliente");
 
         jLabel6.setText("Agência");
+
+        jComboBox2.setModel(listarAgencias());
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,11 +106,11 @@ public class Int_Conta extends javax.swing.JFrame {
                                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(33, 33, 33)
                                         .addComponent(jRadioButton2))
+                                    .addComponent(jLabel5)
                                     .addComponent(jLabel6)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 117, Short.MAX_VALUE))
-                                    .addComponent(jLabel5)))
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 117, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(118, 118, 118)
                                 .addComponent(jLabel4)))
@@ -173,6 +191,14 @@ public class Int_Conta extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        listarClientes();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+       listarAgencias();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -207,6 +233,35 @@ public class Int_Conta extends javax.swing.JFrame {
             }
         });
     }
+    
+    private ComboBoxModel listarClientes (){
+        ControladorCliente cliente_controlador = new ControladorCliente();
+        DefaultComboBoxModel df = null;
+        try {            
+            df = cliente_controlador.listarClientes();           
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Driver não instalado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
+        }finally {
+            return df;
+        }
+    }
+    
+    private ComboBoxModel listarAgencias (){
+        ControladorAgencia agencias_controlador = new ControladorAgencia();
+        DefaultComboBoxModel df = null;
+        try {            
+            df = agencias_controlador.listarAgencias();           
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Driver não instalado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
+        }finally {
+            return df;
+        }
+    }
+     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
