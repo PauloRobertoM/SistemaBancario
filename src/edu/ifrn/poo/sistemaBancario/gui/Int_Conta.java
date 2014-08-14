@@ -196,7 +196,7 @@ public class Int_Conta extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-       listarAgencias();
+        listarAgencias();
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
@@ -243,12 +243,12 @@ public class Int_Conta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Driver não instalado!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
-        }finally {
+        } finally {
             return df;
         }
     }
     
-    private ComboBoxModel listarAgencias (){
+    private ComboBoxModel listarAgencias(){
         ControladorAgencia agencias_controlador = new ControladorAgencia();
         DefaultComboBoxModel df = null;
         try {            

@@ -13,9 +13,8 @@ public class BancoDao {
         Connection conn = ConnectionFactory.getConnection();        
         
         //Construir o comando SQL
-        String sql = "INSERT INTO banco" +  "(idBanco, nome, numero) VALUES" + "(?,?,?)";
+        String sql = "INSERT INTO banco" +  "(idbanco, nome, numero) VALUES" + "(?,?,?)";
         PreparedStatement stm = conn.prepareStatement(sql);
-        int id=0;
         
         //stm.setInt(1, id);
         stm.setString(1, b.getNome());
@@ -55,7 +54,7 @@ public class BancoDao {
         ArrayList<Banco> bancos = new ArrayList<Banco>();
         Banco b;
         //Construir o comando SQL
-        String sql = "SELECT * FROM Banco ORDER BY numero ASC";
+        String sql = "SELECT * FROM banco ORDER BY numeroBanco ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -65,7 +64,7 @@ public class BancoDao {
         while(rs.next()== true) {
             b = new Banco();
             
-			b.setNome(rs.getString("nome"));
+            b.setNome(rs.getString("nome"));
             b.setNumero(rs.getInt("numero"));      
             
             bancos.add(b);
@@ -115,13 +114,14 @@ public class BancoDao {
                 
         return res;
     } 
-    public static int getIdByNumero(String nomeBanco) throws ClassNotFoundException, SQLException {
+    public int getIdByNome(String nomeBanco) throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
         
         //construir o comando SQL
-        String sql = "SELECT id FROM Banco WHERE nomeBanco = ?";
+        System.out.println("CHEGUEI AQUI...2");
+        String sql = "SELECT idbanco FROM banco WHERE nomeBanco = (?)";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         stm.setString(1, nomeBanco);           
@@ -129,7 +129,10 @@ public class BancoDao {
         //executar e validar o comando SQL.
         rs = stm.executeQuery();
         
-        return rs.getInt("id");  
+        
+        
+        rs.next();
+        return rs.getInt("idbanco");  
     }
     public String[] listarNomeBancos() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão

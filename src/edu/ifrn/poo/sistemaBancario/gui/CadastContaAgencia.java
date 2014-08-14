@@ -155,21 +155,24 @@ public class CadastContaAgencia extends javax.swing.JFrame {
         numero = Integer.parseInt(this.jTextField1.getText());
         nome = this.jTextField2.getText();
         endereco = this.jTextField3.getText();
-        nomeGerente = this.jTextField2.getText();
+        nomeGerente = this.jTextField4.getText();
         nomeBanco = this.jComboBox1.getSelectedItem().toString();
      
-    
+    System.out.println(nomeBanco);   
      
      ControladorBanco banco_controlador = new ControladorBanco();
      int banco_id = 0;
         try {
-           banco_id = banco_controlador.getIdByNumero(nomeBanco);
+           System.out.println("CHEGUEI AQUI...");
+           banco_id = banco_controlador.getIdByNome(nomeBanco);
+          
+           
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this,"Driver não instalado!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
         }
-               
+             System.out.println(banco_id);   
         ControladorAgencia agencia_controlador = new ControladorAgencia();
         try {
             Agencia a = new Agencia();
@@ -177,12 +180,13 @@ public class CadastContaAgencia extends javax.swing.JFrame {
             a.setNome(nome);
             a.setEndereco(endereco);
             a.setNomeGerente(nomeGerente);
-            a.setBanco(null);
+            a.setIdBanco(banco_id);
+//            a.setBanco(null);
             agencia_controlador.cadastrarAgencia(a);
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Driver não instalado!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
+            JOptionPane.showMessageDialog(this, "Comando SQL inválido - CadastrarAgencia!");
         }
        
     }//GEN-LAST:event_jButton1ActionPerformed

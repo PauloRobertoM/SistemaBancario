@@ -18,7 +18,7 @@ public class ControladorAgencia {
     
     public DefaultComboBoxModel listarAgencias() throws ClassNotFoundException, SQLException {
         AgenciaDao dao = new AgenciaDao();
-        Integer[] agencias = dao.listarNumAgencias();
+        String[] agencias = dao.listarNumAgencias();
         DefaultComboBoxModel df = new DefaultComboBoxModel(agencias);        
         return df;
     }
@@ -48,9 +48,9 @@ public class ControladorAgencia {
             obj[1] = a.getNome();
             obj[2] = a.getEndereco();
             obj[3] = a.getNomeGerente();
-            obj[4] = a.getBanco().getNome();
-            obj[5] = a.getBanco().getNumero();
-                        
+//            obj[4] = a.getBanco().getNome();
+//            obj[5] = a.getBanco().getNumero();
+//                        
             dft.addRow(obj);
         }
 		

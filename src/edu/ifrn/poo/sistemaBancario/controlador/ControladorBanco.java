@@ -19,10 +19,10 @@ public class ControladorBanco {
         DefaultComboBoxModel df = new DefaultComboBoxModel(bancos);
         return df;
     }
-    public int getIdByNumero(String nomeBanco) throws ClassNotFoundException, SQLException {
+    public int getIdByNome(String nomeBanco) throws ClassNotFoundException, SQLException {
         BancoDao bancodao = new BancoDao();
         
-        return bancodao.getIdByNumero(nomeBanco);
+        return bancodao.getIdByNome(nomeBanco);
     }
     public DefaultTableModel listarBanco() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
