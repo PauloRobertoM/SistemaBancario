@@ -3,10 +3,8 @@ package edu.ifrn.poo.sistemaBancario.controlador;
 import edu.ifrn.poo.sistemaBancario.dao.ClienteDao;
 import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class ControladorCliente {

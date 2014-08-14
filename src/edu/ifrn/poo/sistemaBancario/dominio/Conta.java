@@ -4,8 +4,22 @@ public class Conta{
     private int numero;
     private boolean ativa;
     private double saldo;
-    Cliente c ;
-    Agencia a;
+//    Cliente c ;
+//    Agencia a;
+    int idCliente, idAgencia;
+    
+    public int getIdCliente() {
+        return idCliente;
+    }
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+    public int getIdAgencia() {
+        return idAgencia;
+    }
+    public void setIdAgencia(int idAgencia) {
+        this.idAgencia = idAgencia;
+    }
     
     public boolean getAtiva() {
         return ativa;
@@ -26,18 +40,18 @@ public class Conta{
         this.saldo = saldo;
     }
     
-    public void setCliente(Cliente c) {
-        this.c = c;
-    }
-    public Cliente getCliente(){
-        return c;
-    }
-    public void setAgencia(Agencia a) {
-        this.a = a;
-    }
-    public Agencia getAgencia(){
-        return a;
-    }
+//    public void setCliente(Cliente c) {
+//        this.c = c;
+//    }
+//    public Cliente getCliente(){
+//        return c;
+//    }
+//    public void setAgencia(Agencia a) {
+//        this.a = a;
+//    }
+//    public Agencia getAgencia(){
+//        return a;
+//    }
     
     public boolean sacar(double valor){
         try{

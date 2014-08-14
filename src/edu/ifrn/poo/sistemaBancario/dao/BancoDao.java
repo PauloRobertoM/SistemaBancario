@@ -13,7 +13,7 @@ public class BancoDao {
         Connection conn = ConnectionFactory.getConnection();        
         
         //Construir o comando SQL
-        String sql = "INSERT INTO banco" +  "(idbanco, nome, numero) VALUES" + "(?,?,?)";
+        String sql = "INSERT INTO Banco (idBanco, nome, numero) VALUES (?,?,?)";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //stm.setInt(1, id);
@@ -23,29 +23,6 @@ public class BancoDao {
         //Executar e validar o comando SQL.
         stm.execute();
     }
-    
-//    public Integer[] listarNumBancos() throws ClassNotFoundException, SQLException {
-//        //Estabelecer a conexão
-//        Connection conn = ConnectionFactory.getConnection();
-//        ResultSet rs;
-//        Integer[] res = new Integer[this.quantidadeBancos()];
-//        int i = 0;
-//        
-//        //Construir o comando SQL
-//        String sql = "SELECT numero FROM banco ORDER BY nome ASC";
-//        PreparedStatement stm = conn.prepareStatement(sql);
-//        
-//        //Executar e validar o comando SQL.
-//        rs = stm.executeQuery();
-//        
-//        //Converter ResultSet em String        
-//        while(rs.next()== true) {
-//            res[i] = rs.getInt("numero");                       
-//            i++;
-//        }
-//                
-//        return res;
-//    }
 	
     public ArrayList<Banco> listarBanco() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
@@ -54,7 +31,7 @@ public class BancoDao {
         ArrayList<Banco> bancos = new ArrayList<Banco>();
         Banco b;
         //Construir o comando SQL
-        String sql = "SELECT * FROM banco ORDER BY numeroBanco ASC";
+        String sql = "SELECT * FROM Banco ORDER BY numeroBanco ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -64,11 +41,10 @@ public class BancoDao {
         while(rs.next()== true) {
             b = new Banco();
             
-            b.setNome(rs.getString("nome"));
-            b.setNumero(rs.getInt("numero"));      
+            b.setNome(rs.getString("nomeBanco"));
+            b.setNumero(rs.getInt("numeroBanco"));      
             
             bancos.add(b);
-          
         }
         return bancos;          
     }
@@ -80,7 +56,7 @@ public class BancoDao {
         int quantidade;
         
         //Construir o comando SQL
-        String sql = "SELECT COUNT(*) FROM banco";
+        String sql = "SELECT COUNT(*) FROM Banco";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -100,7 +76,7 @@ public class BancoDao {
         int i = 0;
         
         //Construir o comando SQL
-        String sql = "SELECT nome FROM banco ORDER BY nome ASC";
+        String sql = "SELECT nomeBanco FROM Banco ORDER BY nomeBanco ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -110,8 +86,7 @@ public class BancoDao {
         while(rs.next()== true) {
             res[i] = rs.getString(1);                       
             i++;
-        }
-                
+        }        
         return res;
     } 
     public int getIdByNome(String nomeBanco) throws ClassNotFoundException, SQLException {
@@ -120,19 +95,16 @@ public class BancoDao {
         ResultSet rs;
         
         //construir o comando SQL
-        System.out.println("CHEGUEI AQUI...2");
-        String sql = "SELECT idbanco FROM banco WHERE nomeBanco = (?)";
+        String sql = "SELECT idBanco FROM Banco WHERE nomeBanco = (?)";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         stm.setString(1, nomeBanco);           
         
         //executar e validar o comando SQL.
         rs = stm.executeQuery();
-        
-        
-        
+
         rs.next();
-        return rs.getInt("idbanco");  
+        return rs.getInt("idBanco");  
     }
     public String[] listarNomeBancos() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
@@ -142,7 +114,7 @@ public class BancoDao {
         int i = 0;
         
         //construir o comando SQL
-        String sql = "SELECT nomeBanco FROM banco ORDER BY nomeBanco ASC";
+        String sql = "SELECT nomeBanco FROM Banco ORDER BY nomeBanco ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //executar e validar o comando SQL.
@@ -152,8 +124,7 @@ public class BancoDao {
         while(rs.next()== true) {
             res[i] = rs.getString("nomeBanco");                       
             i++;
-        }
-                
+        }         
         return res;
     }
 }

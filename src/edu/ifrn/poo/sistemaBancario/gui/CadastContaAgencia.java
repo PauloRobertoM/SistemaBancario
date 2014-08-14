@@ -35,7 +35,7 @@ public class CadastContaAgencia extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastro de Agência e Conta.");
+        jLabel1.setText("Cadastro de Agência e Conta");
 
         jLabel2.setText("Banco:");
 
@@ -56,7 +56,6 @@ public class CadastContaAgencia extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(listarBancos());
-        jComboBox1.setActionCommand("comboBoxChanged");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -99,17 +98,16 @@ public class CadastContaAgencia extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 27, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,22 +155,17 @@ public class CadastContaAgencia extends javax.swing.JFrame {
         endereco = this.jTextField3.getText();
         nomeGerente = this.jTextField4.getText();
         nomeBanco = this.jComboBox1.getSelectedItem().toString();
-     
-    System.out.println(nomeBanco);   
-     
-     ControladorBanco banco_controlador = new ControladorBanco();
-     int banco_id = 0;
+
+        ControladorBanco banco_controlador = new ControladorBanco();
+        int banco_id = 0;
         try {
-           System.out.println("CHEGUEI AQUI...");
-           banco_id = banco_controlador.getIdByNome(nomeBanco);
-          
-           
+           banco_id = banco_controlador.getIdByNome(nomeBanco); 
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this,"Driver não instalado!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
         }
-             System.out.println(banco_id);   
+        
         ControladorAgencia agencia_controlador = new ControladorAgencia();
         try {
             Agencia a = new Agencia();

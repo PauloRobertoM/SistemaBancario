@@ -14,40 +14,19 @@ public class ContaDao {
         Connection conn = ConnectionFactory.getConnection();        
 
         //Construir o comando SQL
-        String sql = "INSERT INTO Conta" +  "(numero, ativa, saldo) VALUES" + "(?,?,?)";
+        String sql = "INSERT INTO Conta (numero, ativa, saldo, Cliente_idCliente, Agencia_idAgencia) VALUES (?,?,?,?,?)";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         
         //preparedStatement.setInt(1, 1);
         preparedStatement.setInt(1, c.getNumero());
         preparedStatement.setBoolean(2, c.getAtiva());
         preparedStatement.setDouble(3, c.getSaldo());
-        
+        preparedStatement.setInt(4, c.getIdCliente);
+        preparedStatement.setInt(5, c.getIdAgencia());
         //Executar e validar o comando SQL.
         preparedStatement.executeUpdate();
     }
 
-//    public Integer[] listarConta() throws ClassNotFoundException, SQLException {
-//        //Estabelecer a conexão
-//        Connection conn = ConnectionFactory.getConnection();
-//        ResultSet rs;
-//        Integer[] res = new Integer[this.quantidadeContas()];
-//        int i = 0;
-//        
-//        //Construir o comando SQL
-//        String sql = "SELECT numero FROM Conta ORDER BY numero ASC";
-//        PreparedStatement stm = conn.prepareStatement(sql);
-//        
-//        //Executar e validar o comando SQL.
-//        rs = stm.executeQuery();
-//        
-//        //Converter ResultSet em String        
-//        while(rs.next()== true) {
-//            res[i] = rs.getInt("numero");                       
-//            i++;
-//        }
-//        return res;          
-//    }
-    
     public ArrayList<Conta> listarConta() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();

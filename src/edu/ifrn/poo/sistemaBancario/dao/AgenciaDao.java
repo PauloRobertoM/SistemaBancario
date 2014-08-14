@@ -14,45 +14,18 @@ public class AgenciaDao {
         Connection conn = ConnectionFactory.getConnection();        
         
         //Construir o comando SQL
-        String sql = "INSERT INTO Agencia" +  "(numero, nome, endereco, nomeGerente, banco_idbanco) VALUES" + "(?,?,?,?,?)";
+        String sql = "INSERT INTO Agencia (numero, nome, endereco, nomeGerente, Banco_idBanco) VALUES (?,?,?,?,?)";
         PreparedStatement stm = conn.prepareStatement(sql);
-        int id=0;
         
-        //stm.setInt(1, id);
         stm.setInt(1, a.getNumero());
         stm.setString(2, a.getNome());
         stm.setString(3, a.getEndereco());
         stm.setString(4, a.getNomeGerente());        
         stm.setInt(5, a.getIdBanco());
         //Executar e validar o comando SQL.
-        
-        System.out.println("CHEGUEI AQUI...INSERIR");
         stm.executeUpdate();
     }
-     
-//    public Integer[] listarNumAgencias() throws ClassNotFoundException, SQLException {
-//        //Estabelecer a conexão
-//        Connection conn = ConnectionFactory.getConnection();
-//        ResultSet rs;
-//        Integer[] res = new Integer[this.quantidadeAgencias()];
-//        int i = 0;
-//        
-//        //Construir o comando SQL
-//        String sql = "SELECT numero FROM agencia ORDER BY nome ASC";
-//        PreparedStatement stm = conn.prepareStatement(sql);
-//        
-//        //Executar e validar o comando SQL.
-//        rs = stm.executeQuery();
-//        
-//        //Converter ResultSet em String        
-//        while(rs.next()== true) {
-//            res[i] = rs.getInt("numero");                       
-//            i++;
-//        }
-//                
-//        return res;
-//    }
-	
+
     public ArrayList<Agencia> listarAgencia() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
@@ -62,7 +35,7 @@ public class AgenciaDao {
         Banco b;
         //Construir o comando SQL
 //        String sql = "SELECT * FROM Agencia ORDER BY numero ASC";
-        String sql = "SELECT * FROM Agencia, Conta where Agencia.Conta_idConta = Conta.idConta;";
+        String sql = "SELECT * FROM Agencia, Banco where Agencia.Banco_idBanco = Banco.idBanco";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -78,10 +51,10 @@ public class AgenciaDao {
             a.setEndereco(rs.getString("endereco"));
             a.setNomeGerente(rs.getString("nomeGerente"));
             
-//            b.setNome(rs.getString("nome"));
-//            b.setNumero(rs.getInt("numero")); 
-//            a.setBanco(b);
-//            
+            b.setNome(rs.getString("nome"));
+            b.setNumero(rs.getInt("numero")); 
+            a.setBanco(b);
+            
             agencias.add(a);
         }
         return agencias;          
