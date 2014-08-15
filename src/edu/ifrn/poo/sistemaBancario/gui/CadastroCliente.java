@@ -209,6 +209,9 @@ public class CadastroCliente extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
          System.err.println(ex.getMessage());
     }
+        new CadastContaAgencia().setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

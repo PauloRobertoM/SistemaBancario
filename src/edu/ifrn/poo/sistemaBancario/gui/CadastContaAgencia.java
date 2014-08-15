@@ -181,7 +181,10 @@ public class CadastContaAgencia extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Comando SQL inválido - CadastrarAgencia!");
         }
-       
+        
+        new NavegacaoInicial().setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
