@@ -18,7 +18,7 @@ public class ControladorAgencia {
     
     public DefaultComboBoxModel listarAgencias() throws ClassNotFoundException, SQLException {
         AgenciaDao dao = new AgenciaDao();
-        String[] agencias = dao.listarNumAgencias();
+        String[] agencias = dao.listarNomeAgencias();
         DefaultComboBoxModel df = new DefaultComboBoxModel(agencias);        
         return df;
     }

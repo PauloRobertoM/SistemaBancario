@@ -51,8 +51,8 @@ public class AgenciaDao {
             a.setEndereco(rs.getString("endereco"));
             a.setNomeGerente(rs.getString("nomeGerente"));
             
-            b.setNome(rs.getString("nome"));
-            b.setNumero(rs.getInt("numero")); 
+            b.setNome(rs.getString("nomeBanco"));
+            b.setNumero(rs.getInt("numeroBanco")); 
             a.setBanco(b);
             
             agencias.add(a);
@@ -79,7 +79,7 @@ public class AgenciaDao {
         return quantidade;
     }
     
-    public String[] listarNumAgencias() throws ClassNotFoundException, SQLException {
+    public String[] listarNomeAgencias() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
