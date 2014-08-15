@@ -16,6 +16,12 @@ public class ControladorAgencia {
         agencia_dao.inserir(a);
     }
     
+    public int getIdByNome(String agencia) throws ClassNotFoundException, SQLException {
+        AgenciaDao agenciadao = new AgenciaDao();
+        
+        return agenciadao.getIdByNome(agencia);
+    }
+    
     public DefaultComboBoxModel listarAgencias() throws ClassNotFoundException, SQLException {
         AgenciaDao dao = new AgenciaDao();
         String[] agencias = dao.listarNomeAgencias();

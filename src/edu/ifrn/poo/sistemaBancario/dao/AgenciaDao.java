@@ -101,4 +101,21 @@ public class AgenciaDao {
                 
         return res;
     }   
+    public int getIdByNome(String agencia) throws ClassNotFoundException, SQLException {
+        //Estabelecer a conexão
+        Connection conn = ConnectionFactory.getConnection();
+        ResultSet rs;
+        
+        //construir o comando SQL
+        String sql = "SELECT idAgencia FROM Agencia WHERE nome = (?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setString(1, agencia);           
+        
+        //executar e validar o comando SQL.
+        rs = stm.executeQuery();
+
+        rs.next();
+        return rs.getInt("idAgencia");  
+    }
 }

@@ -5,7 +5,7 @@ public class Agencia{
     private String nome;
     private String endereco;
     private String nomeGerente;
-//    Banco b;
+    Banco b;
     int idBanco;
     
     public int getIdBanco() {
@@ -41,12 +41,12 @@ public class Agencia{
         this.nomeGerente = nomeGerente;
     }
 	
-//    public void setBanco(Banco b) {
-//        this.b = b;
-//    }
-//    public Banco getBanco(){
-//        return b;
-//    }
+    public void setBanco(Banco b) {
+        this.b = b;
+    }
+    public Banco getBanco(){
+        return b;
+    }
     
     public void criarConta(Cliente c, int numConta, int limConta, String tipoConta){
     

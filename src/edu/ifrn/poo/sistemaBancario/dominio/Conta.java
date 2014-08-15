@@ -4,7 +4,7 @@ public class Conta{
     private int numero;
     private boolean ativa;
     private double saldo;
-//    Cliente c ;
+    Cliente c ;
 //    Agencia a;
     int idCliente, idAgencia;
     
@@ -40,12 +40,12 @@ public class Conta{
         this.saldo = saldo;
     }
     
-//    public void setCliente(Cliente c) {
-//        this.c = c;
-//    }
-//    public Cliente getCliente(){
-//        return c;
-//    }
+    public void setCliente(Cliente c) {
+        this.c = c;
+    }
+    public Cliente getCliente(){
+        return c;
+    }
 //    public void setAgencia(Agencia a) {
 //        this.a = a;
 //    }

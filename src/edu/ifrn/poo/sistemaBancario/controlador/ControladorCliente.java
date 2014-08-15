@@ -1,5 +1,6 @@
 package edu.ifrn.poo.sistemaBancario.controlador;
 
+import edu.ifrn.poo.sistemaBancario.dao.BancoDao;
 import edu.ifrn.poo.sistemaBancario.dao.ClienteDao;
 import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import java.sql.SQLException;
@@ -17,7 +18,11 @@ public class ControladorCliente {
         ClienteDao cliente_dao = new ClienteDao();
         cliente_dao.listarCliente();
     }
-    
+    public int getIdByNome(String cliente) throws ClassNotFoundException, SQLException {
+        ClienteDao clientedao = new ClienteDao();
+        
+        return clientedao.getIdByNome(cliente);
+    }
     public DefaultComboBoxModel listarClientes() throws ClassNotFoundException, SQLException {
         ClienteDao dao = new ClienteDao();
         String[] clientes = dao.listarNomeClientes();

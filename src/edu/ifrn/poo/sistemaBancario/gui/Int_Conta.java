@@ -165,7 +165,7 @@ public class Int_Conta extends javax.swing.JFrame {
         String nomeCliente, nomeAgencia;
         
         numero = Integer.parseInt(this.jTextField1.getText());
-        ativa = buttonGroup1.getSelection(); // verificar como fazer //
+        ativa = buttonGroup1.isSelected(null); // verificar como fazer //
         saldo = Double.parseDouble(this.jTextField2.getText());
         nomeCliente = this.jComboBox1.getSelectedItem().toString();
         nomeAgencia = this.jComboBox2.getSelectedItem().toString();
@@ -183,7 +183,7 @@ public class Int_Conta extends javax.swing.JFrame {
         ControladorAgencia agencia_controlador = new ControladorAgencia();
         int agencia_id = 0;
         try {
-           agencia_id = cliente_controlador.getIdByNome(nomeAgencia); 
+           agencia_id = agencia_controlador.getIdByNome(nomeAgencia); 
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this,"Driver não instalado!");
         } catch (SQLException ex) {
@@ -197,7 +197,7 @@ public class Int_Conta extends javax.swing.JFrame {
             c.setAtiva(ativa);
             c.setSaldo(saldo);
             c.setIdCliente(cliente_id);
-            c.setIdAgenca(agencia_id);
+            c.setIdAgencia(agencia_id);
 
             conta_controlador.cadastrarConta(c);
             
