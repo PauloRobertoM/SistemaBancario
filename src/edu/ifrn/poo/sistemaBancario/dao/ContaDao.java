@@ -21,7 +21,7 @@ public class ContaDao {
         preparedStatement.setInt(1, c.getNumero());
         preparedStatement.setBoolean(2, c.getAtiva());
         preparedStatement.setDouble(3, c.getSaldo());
-        preparedStatement.setInt(4, c.getIdCliente);
+        preparedStatement.setInt(4, c.getIdCliente());
         preparedStatement.setInt(5, c.getIdAgencia());
         //Executar e validar o comando SQL.
         preparedStatement.executeUpdate();

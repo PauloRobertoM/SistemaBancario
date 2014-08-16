@@ -26,28 +26,6 @@ public class ClienteDao {
 
     }
     
-//    public Integer[] listarCliente() throws ClassNotFoundException, SQLException {
-//        //Estabelecer a conexão
-//        Connection conn = ConnectionFactory.getConnection();
-//        ResultSet rs;
-//        Integer[] res = new Integer[this.quantidadeCliente()];
-//        int i = 0;
-//        
-//        //Construir o comando SQL
-//        String sql = "SELECT * FROM cliente";
-//        PreparedStatement stm = conn.prepareStatement(sql);
-//        
-//        //Executar e validar o comando SQL.
-//        rs = stm.executeQuery();
-//        
-//        //Converter ResultSet em String        
-//        while(rs.next()== true) {
-//            res[i] = rs.getInt("nome");                       
-//            i++;
-//        }
-//                
-//        return res;
-//    }
     public ArrayList<Cliente> listarCliente() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
@@ -132,5 +110,22 @@ public class ClienteDao {
         quantidade = rs.getInt(1);
                 
         return quantidade;
+    }
+    public int getIdByNome(String cliente) throws ClassNotFoundException, SQLException {
+        //Estabelecer a conexão
+        Connection conn = ConnectionFactory.getConnection();
+        ResultSet rs;
+        
+        //construir o comando SQL
+        String sql = "SELECT idCliente FROM Cliente WHERE nome = (?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setString(1, cliente);           
+        
+        //executar e validar o comando SQL.
+        rs = stm.executeQuery();
+
+        rs.next();
+        return rs.getInt("idCliente");  
     }
 }
