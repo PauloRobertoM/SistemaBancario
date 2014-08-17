@@ -1,6 +1,5 @@
 package edu.ifrn.poo.sistemaBancario.controlador;
 
-import edu.ifrn.poo.sistemaBancario.dao.BancoDao;
 import edu.ifrn.poo.sistemaBancario.dao.ClienteDao;
 import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import java.sql.SQLException;

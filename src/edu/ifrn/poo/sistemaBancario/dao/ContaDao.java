@@ -59,7 +59,28 @@ public class ContaDao {
         }
         return contas;          
     }
-    
+     public Integer[] listarNumeroContas() throws ClassNotFoundException, SQLException {
+        //Estabelecer a conexão
+        Connection conn = ConnectionFactory.getConnection();
+        ResultSet rs;
+        Integer[] res = new Integer[this.quantidadeContas()];
+        int i = 0;
+        
+        //construir o comando SQL
+        String sql = "SELECT numero FROM Conta ORDER BY numero ASC";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        //executar e validar o comando SQL.
+        rs = stm.executeQuery();
+        
+        //Converter ResultSet em String        
+        while(rs.next()== true) {
+            res[i] = rs.getInt("numero");                       
+            i++;
+        }
+        return res;
+    }
+     
     private int quantidadeContas() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
@@ -77,5 +98,39 @@ public class ContaDao {
         quantidade = rs.getInt(1);
                 
         return quantidade;
+    }
+    public int getIdByNumero(int numero) throws ClassNotFoundException, SQLException {
+        //Estabelecer a conexão
+        Connection conn = ConnectionFactory.getConnection();
+        ResultSet rs;
+        
+        //construir o comando SQL
+        String sql = "SELECT idConta FROM Conta WHERE numero = (?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setInt(1, numero);           
+        
+        //executar e validar o comando SQL.
+        rs = stm.executeQuery();
+
+        rs.next();
+        return rs.getInt("idConta");  
+    }
+    public double getSaldoByNumero(int numero) throws ClassNotFoundException, SQLException {
+        //Estabelecer a conexão
+        Connection conn = ConnectionFactory.getConnection();
+        ResultSet rs;
+        
+        //construir o comando SQL
+        String sql = "SELECT saldo FROM Conta WHERE numero = (?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setInt(1, numero);           
+        
+        //executar e validar o comando SQL.
+        rs = stm.executeQuery();
+
+        rs.next();
+        return rs.getDouble("saldo");
     }
 }

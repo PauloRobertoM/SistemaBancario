@@ -13,7 +13,7 @@ public class ClienteDao {
         Connection conn = ConnectionFactory.getConnection();
         
         //Construir o comando SQL
-        String sql = "INSERT INTO Cliente" + "(nome, telefone, email) VALUES" + "(?,?,?)";
+        String sql = "INSERT INTO Cliente (nome, telefone, email) VALUES (?,?,?)";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         
          //preparedStatement.setInt(1, 1);
@@ -52,24 +52,24 @@ public class ClienteDao {
         }
         return clientes;          
     }
-    private int quantidadeCliente() throws ClassNotFoundException, SQLException {
-        //Estabelecer a conexão
-        Connection conn = ConnectionFactory.getConnection();
-        ResultSet rs;        
-        int quantidade = 0;
-        
-        //Construir o comando SQL
-        String sql = "SELECT COUNT(*) FROM cliente";
-        PreparedStatement stm = conn.prepareStatement(sql);
-        
-        //Executar e validar o comando SQL.
-        rs = stm.executeQuery();
-        
-        rs.next();        
-        quantidade = rs.getInt(1);
-                
-        return quantidade;
-    }
+//    private int quantidadeCliente() throws ClassNotFoundException, SQLException {
+//        //Estabelecer a conexão
+//        Connection conn = ConnectionFactory.getConnection();
+//        ResultSet rs;        
+//        int quantidade = 0;
+//        
+//        //Construir o comando SQL
+//        String sql = "SELECT COUNT(*) FROM cliente";
+//        PreparedStatement stm = conn.prepareStatement(sql);
+//        
+//        //Executar e validar o comando SQL.
+//        rs = stm.executeQuery();
+//        
+//        rs.next();        
+//        quantidade = rs.getInt(1);
+//                
+//        return quantidade;
+//    }
     
     public String[] listarNomeClientes() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão

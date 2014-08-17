@@ -1,11 +1,10 @@
 package edu.ifrn.poo.sistemaBancario.controlador;
 
-import edu.ifrn.poo.sistemaBancario.dao.ClienteDao;
 import edu.ifrn.poo.sistemaBancario.dao.ContaDao;
-import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
 import edu.ifrn.poo.sistemaBancario.dominio.Conta;
 import java.sql.SQLException;
 import java.util.Iterator;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 public class ControladorConta {
@@ -24,6 +23,22 @@ public class ControladorConta {
         conta_dao.listarConta();
     }
     
+    public int getIdByNumero(int numero)  throws ClassNotFoundException, SQLException {
+        ContaDao contadao = new ContaDao();
+        
+        return contadao.getIdByNumero(numero);
+    }
+    public double getSaldoByNumero(int numero)  throws ClassNotFoundException, SQLException {
+        ContaDao contadao = new ContaDao();
+        
+        return contadao.getSaldoByNumero(numero);
+    }
+    public DefaultComboBoxModel listarContas() throws ClassNotFoundException, SQLException {
+        ContaDao dao = new ContaDao();
+        Integer[] contas = dao.listarNumeroContas();
+        DefaultComboBoxModel df = new DefaultComboBoxModel(contas);
+        return df;
+    }
     public DefaultTableModel listarConta() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
         ContaDao dao = new ContaDao(); 
@@ -52,13 +67,7 @@ public class ControladorConta {
             obj[4] = c.getCliente().getTelefone();
             obj[5] = c.getCliente().getEmail();
             dft.addRow(obj);
-//            dft.addColumn(c.getNumero());
-//            dft.addColumn(c.getAtiva());
-//            dft.addColumn(c.getSaldo());
-//            dft.addColumn(c.getCliente().getNome());
-//            dft.addColumn(c.getCliente().getTelefone());
-//            dft.addColumn(c.getCliente().getEmail());
-            
+
         }
        
         return dft;
