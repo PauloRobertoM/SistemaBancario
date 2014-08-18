@@ -1,12 +1,16 @@
 package edu.ifrn.poo.sistemaBancario.gui;
 
 import edu.ifrn.poo.sistemaBancario.controlador.ControladorCliente;
-//import edu.ifrn.poo.sistemaBancario.controlador.ControladorPessoaFisica;
-//import edu.ifrn.poo.sistemaBancario.controlador.ControladorPessoaJuridica;
+import edu.ifrn.poo.sistemaBancario.controlador.ControladorPessoaFisica;
+import edu.ifrn.poo.sistemaBancario.controlador.ControladorPessoaJuridica;
+import edu.ifrn.poo.sistemaBancario.dominio.CNPJInvalidoException;
+import edu.ifrn.poo.sistemaBancario.dominio.CPFInvalidoException;
 import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
-//import edu.ifrn.poo.sistemaBancario.dominio.PessoaFisica;
-//import edu.ifrn.poo.sistemaBancario.dominio.PessoaJuridica;
+import edu.ifrn.poo.sistemaBancario.dominio.PessoaFisica;
+import edu.ifrn.poo.sistemaBancario.dominio.PessoaJuridica;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CadastroCliente extends javax.swing.JFrame {
@@ -185,34 +189,75 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
           // cadastro
-        try {  
-        String nome, telefone, email;
-        Cliente c = new Cliente();
-        ControladorCliente controlador = new ControladorCliente();
+        String nome, telefone, email, cpf, cnpj, nomeFantasia;
+        boolean ePessoaFisica = true;
+        int cliente_id;
+        
         nome = this.jTextField1.getText();
         telefone = this.jTextField2.getText();
         email = this.jTextField3.getText();
-            
-        if(jTextField1 == null && jTextField2 == null && jTextField3 == null){
-            JOptionPane.showMessageDialog(null, "Informe todos os dados");
+        
+        cpf = this.jTextField4.getText();
+        cnpj = this.jTextField5.getText();
+        nomeFantasia = this.jTextField6.getText();
+        
+        if (jRadioButton1.isSelected()){
+            ePessoaFisica = true;
         }
-        else{
-            c.setNome(nome);
-            c.setTelefone(telefone);
-            c.setEmail(email);
+        else if (jRadioButton2.isSelected()){
+            ePessoaFisica = false;
+        }
 
-            controlador.cadastrarCliente(c);
-            jTextField1.setText(null);
-            jTextField2.setText(null);
-            jTextField3.setText(null);
+            ControladorCliente controlador_cliente = new ControladorCliente();
+            try{
+                Cliente c = new Cliente();
+                c.setNome(nome);
+                c.setTelefone(telefone);
+                c.setEmail(email);
+                c.setePessoaFisica(ePessoaFisica);
+                controlador_cliente.cadastrarCliente(c);
+                cliente_id = controlador_cliente.getIdByNome(nome);
+                if (ePessoaFisica == true){
+                    ControladorPessoaFisica controlador_pesFisica = new ControladorPessoaFisica();
+
+                    PessoaFisica pf = new PessoaFisica(cpf, cliente_id);
+                    pf.setCpf(cpf);
+                    pf.setIdCliente(cliente_id);
+
+                    controlador_pesFisica.cadastrarPessoaFisica(pf);
+                }       
+                else{
+                    ControladorPessoaJuridica controlador_pesJuridica = new ControladorPessoaJuridica();
+
+                    PessoaJuridica pj = new PessoaJuridica(cnpj, nomeFantasia, cliente_id);
+                    pj.setCnpj(cnpj);
+                    pj.setNomeFantasia(nomeFantasia);
+                    pj.setIdCliente(cliente_id);
+
+                    controlador_pesJuridica.cadastrarPessoaJuridica(pj);
+                }
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, "Driver não instalado!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
+                System.err.println(ex.getMessage());
+            } catch (CPFInvalidoException ex) {
+            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CNPJInvalidoException ex) {
+            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-    } catch (ClassNotFoundException ex) {
-        JOptionPane.showMessageDialog(this, "Driver não instalado!");
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
-         System.err.println(ex.getMessage());
-    }
+//        }
+//            
+//        ControladorCliente cliente_controlador = new ControladorCliente(); 
+//        int cliente_id = 0;
+//        try {
+//           cliente_id = cliente_controlador.getIdByNome(nome); 
+//        } catch (ClassNotFoundException ex) {
+//            JOptionPane.showMessageDialog(this,"Driver não instalado!");
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
+//        }
+       
         new CadastContaAgencia().setVisible(true);
         this.dispose();
         

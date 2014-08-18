@@ -43,7 +43,7 @@ public class ControladorConta {
     
     public DefaultComboBoxModel listarContas() throws ClassNotFoundException, SQLException {
         ContaDao dao = new ContaDao();
-        Integer[] contas = dao.listarNumeroContas();
+        String[] contas = dao.listarNumeroContas();
         DefaultComboBoxModel df = new DefaultComboBoxModel(contas);
         return df;
     }
@@ -82,5 +82,26 @@ public class ControladorConta {
         return dft;
     }
     
+    public DefaultTableModel mostrarSaldo() throws ClassNotFoundException, SQLException {
+        DefaultTableModel dft = new DefaultTableModel();
+        ContaDao dao = new ContaDao(); 
+       
+        Iterator<Conta> it = dao.mostrarSaldo().iterator();
+        Conta c;
+        Object[] obj;
+        
+        // Colunas //
+        dft.addColumn("Saldo");
+         while(it.hasNext()) {
+            c = it.next();
+         
+            obj = new Object[1];
+            obj[0] = c.getSaldo();
+            
+            dft.addRow(obj);
+        }  
+          	
+        return dft;
+    }
    
 }

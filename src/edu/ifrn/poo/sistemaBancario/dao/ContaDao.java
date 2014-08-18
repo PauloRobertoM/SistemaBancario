@@ -27,6 +27,29 @@ public class ContaDao {
         preparedStatement.executeUpdate();
     }
     
+    public ArrayList<Conta> mostrarSaldo() throws ClassNotFoundException, SQLException {
+        //Estabelecer a conexão
+        Connection conn = ConnectionFactory.getConnection();
+        ResultSet rs;
+        ArrayList<Conta> conta = new ArrayList<Conta>();
+        Conta c;
+        //Construir o comando SQL
+        String sql = "SELECT saldo FROM Conta WHERE idConta = (?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+       
+        //Executar e validar o comando SQL.
+        rs = stm.executeQuery();
+        
+        //Converter ResultSet em String        
+        while(rs.next()== true) {
+            c = new Conta();
+            c.setSaldo(rs.getDouble("saldo"));
+            
+            conta.add(c);
+        }
+        return conta;          
+    }
+    
     public void atualizarSaldo(double saldo, int idConta) throws ClassNotFoundException, SQLException {
          //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();        
@@ -75,11 +98,11 @@ public class ContaDao {
         return contas;          
     }
     
-    public Integer[] listarNumeroContas() throws ClassNotFoundException, SQLException {
+    public String[] listarNumeroContas() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
-        Integer[] res = new Integer[this.quantidadeContas()];
+        String[] res = new String[this.quantidadeContas()];
         int i = 0;
         
         //construir o comando SQL
@@ -91,7 +114,7 @@ public class ContaDao {
         
         //Converter ResultSet em String        
         while(rs.next()== true) {
-            res[i] = rs.getInt("numero");                       
+            res[i] = rs.getString(1);                       
             i++;
         }
         return res;

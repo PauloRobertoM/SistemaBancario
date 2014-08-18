@@ -1,5 +1,11 @@
 package edu.ifrn.poo.sistemaBancario.gui;
 
+import edu.ifrn.poo.sistemaBancario.controlador.ControladorConta;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 public class NavegAposVerSaldo extends javax.swing.JFrame {
     public NavegAposVerSaldo() {
         initComponents();
@@ -27,14 +33,7 @@ public class NavegAposVerSaldo extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        jTable1.setModel(mostrarSaldo());
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -87,6 +86,23 @@ public class NavegAposVerSaldo extends javax.swing.JFrame {
                 new NavegAposVerSaldo().setVisible(true);
             }
         });
+    }
+    
+    private TableModel mostrarSaldo(){
+//        int numero;
+//        Int_Conta conta = new Int_Conta();
+//        numero = conta.getIdConta();
+        ControladorConta conta_controlador = new ControladorConta();
+        DefaultTableModel dft = new DefaultTableModel();
+        try {
+            dft = conta_controlador.mostrarSaldo();
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Driver não instalado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
+        }
+        
+        return dft;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

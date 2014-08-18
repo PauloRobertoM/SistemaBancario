@@ -97,18 +97,24 @@ public class NavegAposSacar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new NavegacaoInicial().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
         int numero;
         double valor;
         Conta c = new Conta();
-        numero = Integer.parseInt(this.jComboBox1.getSelectedItem().toString());
+        numero = Integer.parseInt((String) this.jComboBox1.getSelectedItem());
         
-        try{
+//        try{
             valor = Double.parseDouble(this.jTextField1.getText());
             
-        } catch (NumberFormatException exception){
-            System.out.println("Digite um número válido");
-        } 
-//        if (c.sacar(valor)){
+//        } catch (NumberFormatException exception){
+//            System.out.println("Digite um número válido");
+//        } 
+
             ControladorConta conta_controlador = new ControladorConta(); 
             double saldo = 0;
             try {
@@ -119,12 +125,30 @@ public class NavegAposSacar extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
             }
-//        }
-        new NavegacaoInicial().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        saldo = c.sacarBanco(saldo, valor);
+        
+        conta_controlador = new ControladorConta();
+        int conta_id = 0;
+        try {
+           conta_id = conta_controlador.getIdByNumero(numero);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,"Driver não instalado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Comandos SQL Inválido! - Cliente");
+        }
+       
+        System.out.println(conta_id);
+        
+        try {
+            conta_controlador.atualizarSaldo(saldo, conta_id);
+            
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,"Driver não instalado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
+        }
+        
         new Sacado().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

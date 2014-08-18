@@ -67,7 +67,7 @@ public class AgenciaDao {
         int quantidade;
         
         //Construir o comando SQL
-        String sql = "SELECT COUNT(*) FROM agencia";
+        String sql = "SELECT COUNT(*) FROM Agencia";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
@@ -79,38 +79,37 @@ public class AgenciaDao {
         return quantidade;
     }
     
-    public String[] listarNomeAgencias() throws ClassNotFoundException, SQLException {
+    public String[] listarNumeroAgencias() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
-       String[] res = new String[this.quantidadeAgencias()];
+        String[] res = new String[this.quantidadeAgencias()];
         int i = 0;
         
         //Construir o comando SQL
-        String sql = "SELECT nome FROM Agencia ORDER BY nome ASC";
+        String sql = "SELECT numero FROM Agencia ORDER BY numero ASC";
         PreparedStatement stm = conn.prepareStatement(sql);
         
         //Executar e validar o comando SQL.
         rs = stm.executeQuery();
         
         //Converter ResultSet em String        
-        while(rs.next()== true) {
+        while(rs.next() == true) {
             res[i] = rs.getString(1);                       
             i++;
-        }
-                
+        }       
         return res;
-    }   
-    public int getIdByNome(String agencia) throws ClassNotFoundException, SQLException {
+    }    
+   public int getIdByNumero(int numero) throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
         
         //construir o comando SQL
-        String sql = "SELECT idAgencia FROM Agencia WHERE nome = (?)";
+        String sql = "SELECT idAgencia FROM Agencia WHERE numero = (?)";
         PreparedStatement stm = conn.prepareStatement(sql);
         
-        stm.setString(1, agencia);           
+        stm.setInt(1, numero);           
         
         //executar e validar o comando SQL.
         rs = stm.executeQuery();

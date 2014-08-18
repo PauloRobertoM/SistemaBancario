@@ -55,63 +55,100 @@ public class Conta{
 //        return a;
 //    }
     
-    public boolean sacar(double valor) throws  SaldoInvalidoException{
-        if(valor >= saldo) {
-            saldo -= valor;
-            return true;
-        } 
-        else{
-            if (valor <= 0) {
-                throw new SaldoInvalidoException("Valor Inválido");
-            }
-            else{
-                JOptionPane.showMessageDialog(this,"Saldo insuficiente.");
-            }
-            return false;
-        }
-        
-        
-//        try{
-//            if (saldo >= valor){
-//                saldo -= valor;
-//                return true;
+    public boolean sacar(double valor) {//throws  SaldoInvalidoException{
+//        if(valor >= saldo) {
+//            saldo -= valor;
+//            return true;
+//        } 
+//        else{
+//            if (valor <= 0) {
+//                throw new SaldoInvalidoException("Valor Inválido");
 //            }
 //            else{
-//                if (valor < 0){
-//                        System.out.println("Valor inválido. Não é possível realizar o saque.");
-//                }
-//                else{
-//                        System.out.println("Saldo insuficiente.");
-//                }
+//                JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
 //            }
+//            return false;
 //        }
-//        catch (NumberFormatException nfe2){
-//            System.out.println("Só serão aceitos valores numéricos");
-//        }
-//        return false;
+        
+        
+        try{
+            if (saldo >= valor){
+                saldo -= valor;
+                return true;
+            }
+            else{
+                if (valor < 0){
+                        System.out.println("Valor inválido. Não é possível realizar o saque.");
+                }
+                else{
+                        System.out.println("Saldo insuficiente.");
+                }
+            }
+        }
+        catch (NumberFormatException nfe2){
+            System.out.println("Só serão aceitos valores numéricos");
+        }
+        return false;
         
     }
 
-    public void depositar(double valor) throws  SaldoInvalidoException {
-        if(valor <= 0) {
-            throw new SaldoInvalidoException("Valor Inválido");
+    public double sacarBanco(double saldo,double valor) {//throws  SaldoInvalidoException{
+        try{
+            if (saldo >= valor){
+                saldo -= valor;
+                
+            }
+            else{
+                if (valor < 0){
+                        System.out.println("Valor inválido. Não é possível realizar o saque.");
+                }
+                else{
+                        System.out.println("Saldo insuficiente.");
+                }
+            }
         }
-        else{
-            saldo += valor;
+        catch (NumberFormatException nfe2){
+            System.out.println("Só serão aceitos valores numéricos");
         }
-//        try{
-//            if (valor <= 0){
-//                System.out.println("Valor inválido. Não é possível realizar o depósito.");
-//            }
-//            else{
-//                saldo += valor;
-//            }
+        return saldo;
+        
+    }
+    
+    public void depositar(double valor) {//throws  SaldoInvalidoException {
+//        if(valor <= 0) {
+//            throw new SaldoInvalidoException("Valor Inválido");
 //        }
-//        catch(NumberFormatException nfe1){
-//            System.out.println("Só serão aceitos valores numéricos");
+//        else{
+//            saldo += valor;
 //        }
+        try{
+            if (valor <= 0){
+                System.out.println("Valor inválido. Não é possível realizar o depósito.");
+            }
+            else{
+                saldo += valor;
+            }
+        }
+        catch(NumberFormatException nfe1){
+            System.out.println("Só serão aceitos valores numéricos");
+        }
     }
   
+    public double depositarBanco(double saldo, double valor) {//throws  SaldoInvalidoException {
+        try{
+            if (valor <= 0){
+                System.out.println("Valor inválido. Não é possível realizar o depósito.");
+            }
+            else{
+                saldo += valor;
+            }
+        }
+        catch(NumberFormatException nfe1){
+            System.out.println("Só serão aceitos valores numéricos");
+        }
+        return saldo;
+    }
+    
     public double verSaldo(){
         return saldo;
     }

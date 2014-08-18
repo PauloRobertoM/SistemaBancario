@@ -1,6 +1,7 @@
 package edu.ifrn.poo.sistemaBancario.gui;
 
 import edu.ifrn.poo.sistemaBancario.controlador.ControladorConta;
+import edu.ifrn.poo.sistemaBancario.dominio.Conta;
 import java.sql.SQLException;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -41,6 +42,13 @@ public class NavegAposDepositar extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(listarContas());
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -110,14 +118,14 @@ public class NavegAposDepositar extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int numero;
         double valor;
-        
-        numero = Integer.parseInt(this.jComboBox1.getSelectedItem().toString());
-        try{
+        Conta c = new Conta();
+        numero = Integer.parseInt((String) this.jComboBox1.getSelectedItem());
+//        try{
             valor = Double.parseDouble(this.jTextField1.getText());
             
-        } catch (NumberFormatException exception){
-            System.out.println("Digite um número válido");
-        } 
+//        } catch (NumberFormatException exception){
+//            System.out.println("Digite um número válido");
+//        } 
         
         ControladorConta conta_controlador = new ControladorConta(); 
         double saldo = 0;
@@ -129,9 +137,24 @@ public class NavegAposDepositar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
         }
         
+        saldo = c.depositarBanco(saldo, valor);
+        System.out.println(saldo);
+        try {
+            conta_controlador.atualizarSaldo(saldo, numero);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,"Driver não instalado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
+        }
+       
+        
         new Depositado().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        listarContas();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

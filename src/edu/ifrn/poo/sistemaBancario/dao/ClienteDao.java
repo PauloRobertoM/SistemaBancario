@@ -13,13 +13,15 @@ public class ClienteDao {
         Connection conn = ConnectionFactory.getConnection();
         
         //Construir o comando SQL
-        String sql = "INSERT INTO Cliente (nome, telefone, email) VALUES (?,?,?)";
+        String sql = "INSERT INTO Cliente (nome, telefone, email, ePessoaFisica) VALUES (?,?,?,?)";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         
          //preparedStatement.setInt(1, 1);
         preparedStatement.setString(1, c.getNome());
         preparedStatement.setString(2, c.getTelefone());
         preparedStatement.setString(3, c.getEmail());
+        preparedStatement.setBoolean(4, c.isePessoaFisica());
+        
         
         //Executar e validar o comando SQL.
         preparedStatement.executeUpdate();      
