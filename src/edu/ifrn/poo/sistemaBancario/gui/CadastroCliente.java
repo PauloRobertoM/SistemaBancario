@@ -1,7 +1,11 @@
 package edu.ifrn.poo.sistemaBancario.gui;
 
 import edu.ifrn.poo.sistemaBancario.controlador.ControladorCliente;
+//import edu.ifrn.poo.sistemaBancario.controlador.ControladorPessoaFisica;
+//import edu.ifrn.poo.sistemaBancario.controlador.ControladorPessoaJuridica;
 import edu.ifrn.poo.sistemaBancario.dominio.Cliente;
+//import edu.ifrn.poo.sistemaBancario.dominio.PessoaFisica;
+//import edu.ifrn.poo.sistemaBancario.dominio.PessoaJuridica;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -180,14 +184,14 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         // cadastro
+          // cadastro
         try {  
         String nome, telefone, email;
         Cliente c = new Cliente();
         ControladorCliente controlador = new ControladorCliente();
-        nome = jTextField1.getText();
-        telefone = jTextField2.getText();
-        email = jTextField3.getText();
+        nome = this.jTextField1.getText();
+        telefone = this.jTextField2.getText();
+        email = this.jTextField3.getText();
             
         if(jTextField1 == null && jTextField2 == null && jTextField3 == null){
             JOptionPane.showMessageDialog(null, "Informe todos os dados");
@@ -213,7 +217,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

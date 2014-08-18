@@ -28,17 +28,26 @@ public class ControladorConta {
         
         return contadao.getIdByNumero(numero);
     }
+    
     public double getSaldoByNumero(int numero)  throws ClassNotFoundException, SQLException {
         ContaDao contadao = new ContaDao();
         
         return contadao.getSaldoByNumero(numero);
     }
+    
+    public void atualizarSaldo(double saldo, int idConta)  throws ClassNotFoundException, SQLException {
+        ContaDao contadao = new ContaDao();
+        
+        contadao.atualizarSaldo(saldo, idConta);
+    }
+    
     public DefaultComboBoxModel listarContas() throws ClassNotFoundException, SQLException {
         ContaDao dao = new ContaDao();
         Integer[] contas = dao.listarNumeroContas();
         DefaultComboBoxModel df = new DefaultComboBoxModel(contas);
         return df;
     }
+    
     public DefaultTableModel listarConta() throws ClassNotFoundException, SQLException {
         DefaultTableModel dft = new DefaultTableModel();
         ContaDao dao = new ContaDao(); 

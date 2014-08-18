@@ -1,6 +1,7 @@
 package edu.ifrn.poo.sistemaBancario.gui;
 
 import edu.ifrn.poo.sistemaBancario.controlador.ControladorConta;
+import edu.ifrn.poo.sistemaBancario.dominio.Conta;
 import java.sql.SQLException;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -97,17 +98,28 @@ public class NavegAposSacar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int numero;
+        double valor;
+        Conta c = new Conta();
         numero = Integer.parseInt(this.jComboBox1.getSelectedItem().toString());
-        ControladorConta conta_controlador = new ControladorConta(); 
-        double saldo = 0;
-        try {
-           saldo = conta_controlador.getSaldoByNumero(numero); 
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(this,"Driver não instalado!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
-        }
         
+        try{
+            valor = Double.parseDouble(this.jTextField1.getText());
+            
+        } catch (NumberFormatException exception){
+            System.out.println("Digite um número válido");
+        } 
+//        if (c.sacar(valor)){
+            ControladorConta conta_controlador = new ControladorConta(); 
+            double saldo = 0;
+            try {
+               saldo = conta_controlador.getSaldoByNumero(numero); 
+               
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(this,"Driver não instalado!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,"Comandos SQL Inválido!");
+            }
+//        }
         new NavegacaoInicial().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

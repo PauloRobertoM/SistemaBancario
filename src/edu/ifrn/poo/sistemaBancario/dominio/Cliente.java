@@ -4,7 +4,16 @@ public class Cliente{
     private String nome;
     private String telefone;
     private String email;
-	
+    boolean ePessoaFisica;
+
+    public boolean isePessoaFisica() {
+        return ePessoaFisica;
+    }
+
+    public void setePessoaFisica(boolean ePessoaFisica) {
+        this.ePessoaFisica = ePessoaFisica;
+    }
+    
     public String getNome() {
 	return nome;
     }

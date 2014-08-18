@@ -26,7 +26,22 @@ public class ContaDao {
         //Executar e validar o comando SQL.
         preparedStatement.executeUpdate();
     }
+    
+    public void atualizarSaldo(double saldo, int idConta) throws ClassNotFoundException, SQLException {
+         //Estabelecer a conexão
+        Connection conn = ConnectionFactory.getConnection();        
 
+        //Construir o comando SQL
+        String sql = "UPDATE Conta SET saldo = (?) WHERE idConta = (?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setDouble(1, saldo);
+        stm.setInt(2, idConta);
+         
+        //Executar e validar o comando SQL.
+        stm.executeUpdate();
+    }
+    
     public ArrayList<Conta> listarConta() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
@@ -59,7 +74,8 @@ public class ContaDao {
         }
         return contas;          
     }
-     public Integer[] listarNumeroContas() throws ClassNotFoundException, SQLException {
+    
+    public Integer[] listarNumeroContas() throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
         ResultSet rs;
@@ -99,6 +115,7 @@ public class ContaDao {
                 
         return quantidade;
     }
+    
     public int getIdByNumero(int numero) throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();
@@ -116,6 +133,7 @@ public class ContaDao {
         rs.next();
         return rs.getInt("idConta");  
     }
+    
     public double getSaldoByNumero(int numero) throws ClassNotFoundException, SQLException {
         //Estabelecer a conexão
         Connection conn = ConnectionFactory.getConnection();

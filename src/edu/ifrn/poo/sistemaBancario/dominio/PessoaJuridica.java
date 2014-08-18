@@ -31,6 +31,20 @@ public class PessoaJuridica extends Cliente {
         this.cnpj = cnpj;
     }
 
-  
+    public PessoaJuridica(String cnpj, String nomeFantasia, int idCliente) throws CNPJInvalidoException {
+	if(cnpj.length() != 14)	{
+            throw new CNPJInvalidoException("CNPJ deve conter 14 dígitos");
+	}
+	for(int i = 0; i < cnpj.length(); i++){
+            char c = cnpj.charAt(i);
+            if(!Character.isDigit(c)){
+		throw new CNPJInvalidoException("CNPJ deve conter apenas dígitos");
+            }
+	}
+	
+	this.cnpj = cnpj;
+	this.nomeFantasia = nomeFantasia;
+	this.idCliente = idCliente;
+    }
     
 }
