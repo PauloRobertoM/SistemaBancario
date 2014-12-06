@@ -3,7 +3,7 @@ package edu.ifrn.poo.sistemaBancario.dominio;
 public class Banco {
     private String nome;
     private int numero;
-
+	
     public String getNome() {
         return nome;
     }    
@@ -16,14 +16,14 @@ public class Banco {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    
+   	
     public void buscarAgencia(int numero){
 
     }
     
     // Construtor //
-    public Banco(String nome, int numero){
-        this.nome = nome;
-        this.numero = numero;
-    }    
+//    public Banco(String nome, int numero){
+//        this.nome = nome;
+//        this.numero = numero;
+//    }    
 }
