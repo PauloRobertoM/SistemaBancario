@@ -1,17 +1,15 @@
 package edu.ifrn.poo.sistemaBancario.gui;
 
 import edu.ifrn.poo.sistemaBancario.controlador.ControladorConta;
-import edu.ifrn.poo.sistemaBancario.dao.ContaDao;
-import edu.ifrn.poo.sistemaBancario.dominio.Conta;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class Int_Conta extends javax.swing.JFrame {
+public class Conta extends javax.swing.JFrame {
 
     /**
      * Creates new form Conta
      */
-    public Int_Conta() {
+    public Conta() {
         initComponents();
     }
 
@@ -33,7 +31,6 @@ public class Int_Conta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,13 +50,6 @@ public class Int_Conta extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Conta");
 
-        jButton2.setText("Listar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,8 +68,7 @@ public class Int_Conta extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jButton2)))))
+                                    .addComponent(jLabel3)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -112,9 +101,7 @@ public class Int_Conta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addComponent(jButton1)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -127,9 +114,9 @@ public class Int_Conta extends javax.swing.JFrame {
         Integer numero;
         Boolean ativa;
         Double saldo;
-        Conta c = new Conta();
+
         ControladorConta controlador = new ControladorConta();
-//        ContaDao cd = new ContaDao();
+
         numero = Integer.parseInt(this.jTextField1.getText());
         ativa = Boolean.parseBoolean(this.jTextField2.getText());
         saldo = Double.parseDouble(this.jTextField3.getText());
@@ -138,11 +125,7 @@ public class Int_Conta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Informe todos os dados");
         }
         else{
-            c.setNumero(numero);
-            c.setAtiva(ativa);
-            c.setSaldo(saldo);
-//            cd.inserir(numero, ativa, saldo);
-            controlador.cadastrarConta(c);
+            controlador.cadastrarConta(numero, ativa, saldo);
             jTextField1.setText(null);
             jTextField2.setText(null);
             jTextField3.setText(null);
@@ -152,14 +135,8 @@ public class Int_Conta extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Driver não instalado!");
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(this, "Comando SQL inválido!");
-         System.err.println(ex.getMessage());
     }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        VisualizarConta vc = new VisualizarConta();
-        vc.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,27 +155,26 @@ public class Int_Conta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Int_Conta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Conta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Int_Conta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Conta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Int_Conta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Conta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Int_Conta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Conta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Int_Conta().setVisible(true);
+                new Conta().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

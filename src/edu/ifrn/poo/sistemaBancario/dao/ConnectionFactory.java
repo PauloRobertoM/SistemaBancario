@@ -11,9 +11,8 @@ public class ConnectionFactory {
         if(conn == null){
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(
-					"jdbc:mysql://127.0.0.1:3306/mydb?user=root&password=root");
+					"jdbc:mysql://127.0.0.1:3306/mysql?user=root&password=crisviana");
         }
- 
         return conn;
     }
 }
